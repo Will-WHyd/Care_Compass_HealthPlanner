@@ -32,7 +32,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = True
 
 ALLOWED_HOSTS = ['8000-willwhyd-carecompasshea-argrh9u2k12.ws.codeinstitute-ide.net',
-                'https://care-compass-app-b1851415864d.herokuapp.com'
+                'care-compass-app-b1851415864d.herokuapp.com'
                 ]
 
 CSRF_TRUSTED_ORIGINS = ['https://*.codeinstitute-ide.net','https://*.herokuapp.com']
