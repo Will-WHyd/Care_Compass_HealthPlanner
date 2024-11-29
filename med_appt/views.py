@@ -1,10 +1,14 @@
-from django.shortcuts import render
-from django.views.generic import TemplateView
+from django.shortcuts import render, get_object_or_404
+from django.views import generic
+from django.contrib import messages
+from django.http import HttpResponseRedirect
+from .models import Appointment, Consultant
 
 # Create your views here.
-class HomePage(TemplateView):
+class ApptList(generic.ListView):
     """
-    Displays home page"
+    Displays list of appointments
     """
-    template_name = 'index.html'
+    queryset = Appointment.objects.all()
+    template_name = 'appt/appt_list.html'
 
