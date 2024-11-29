@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<p>Test Display: post_detail</p>
+
+<div class="masthead">
+    <div class="container">
+        <div class="row g-0">
+            <div class="col-md-6 masthead-text">
+                <h1 class="post-title">
+                    {{ appt.procedure }}
+                </h1>
+                <p class="post-subtitle">
+                    Consultant: {{ appt.consultant }}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody class="status-{{appt.status | lower }}">
+                <tr>
+                    <td>
+                        {{ appt.appt_date }}
+                    </td>
+                    <td>
+                        {{ appt.appt_time }}
+                    </td>
+                    <td>
+                        {{ appt.status }}
+                    </td>
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col card mb-4 mt-3 left top">
+            <div class="card-body">
+                <article class="card-text">
+                    <h2>Appointment Details</h2>
+                    {{ appt.details | linebreaks|safe }}
+
+                    <h3>Follow Up Details</h3>
+                    {{ appt.followup_details | linebreaks|safe }}
+                    <h3>Travel Plans</h3>
+                    {{ appt.travel_details | linebreaks|safe }}
+                </article>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

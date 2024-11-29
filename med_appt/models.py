@@ -3,10 +3,10 @@ from django.contrib.auth.models import User
 from datetime import datetime
 
 STATUS = (
-    (0, 'Pending'),
-    (1, 'Attended'), 
-    (2, 'Cancelled'),
-    (3, 'Rescheduled'),
+    ('Pending', 'Pending'),
+    ('Attended', 'Attended'), 
+    ('Cancelled', 'Cancelled'),
+    ('Rescheduled', 'Rescheduled'),
 )
 
 # Create your models here.
@@ -31,7 +31,7 @@ class Appointment(models.Model):
     appt_time = models.TimeField(auto_now=False, auto_now_add=False)
     address = models.TextField(max_length=200, null=True, blank=True)
     consultant = models.ForeignKey(Consultant, null=False, blank=False, on_delete=models.CASCADE)
-    status = models.IntegerField(choices=STATUS, default=0)
+    status = models.CharField(choices=STATUS, default='Pending', max_length=20)
     details = models.TextField(null=True, blank=True)
     followup_details = models.TextField(null=True, blank=True)
     travel_details = models.TextField(null=True, blank=True)

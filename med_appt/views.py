@@ -11,4 +11,12 @@ class ApptList(generic.ListView):
     """
     queryset = Appointment.objects.all()
     template_name = 'appt/index.html'
-
+    
+def appt_detail(request, id):
+    appt = get_object_or_404(Appointment, id=id)
+    context = {
+        'appt': appt,
+    }
+    return render(
+        request, "appt/appt_detail.html", context,
+    )

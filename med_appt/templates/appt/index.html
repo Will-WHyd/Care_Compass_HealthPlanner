@@ -14,12 +14,14 @@
                 <div class="col-md-4">
                     <div class="card mb-4">
                         <div class="card-body">
-                            <h2 class="card-title">{{ appt.procedure }}</h2>
-                            <h3 class="card-text">{{ appt.consultant }}</h3>
+                            <a href="{% url 'appt_detail' appt.id %}" class="post-link">
+                                <h2 class="card-title">{{ appt.procedure }}</h2>
+                                <p class="card-text">Consultant: {{ appt.consultant }}</p>
+                            </a>
 
                             <hr />
                             <p class="card-text text-muted h6">{{ appt.appt_date }} </p>
-                            <p class="card-text text-muted h6">{{ appt.status }} </p>
+                            <p class="card-text text-muted h6">{{ appt.get_status_display }} </p>
                         </div>
                     </div>
                 </div>

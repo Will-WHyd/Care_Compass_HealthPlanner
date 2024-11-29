@@ -164,3 +164,25 @@ body {
 .approval {
     color: rgb(222, 146, 168);
 }
+
+/* Table settings */
+
+.table th, .table td {
+    text-align: center;
+}
+.table tbody.status-pending {
+    background-color: #f1c40f; /* Yellow for pending */
+    color: #fff;
+}
+.table tbody.status-attended {
+    background-color: #2ecc71; /* Green for attended */
+    color: #fff;
+}
+.table tbody.status-cancelled {
+    background-color: #e74c3c; /* Red for cancelled */
+    color: #fff;
+}
+.table tbody.status-rescheduled {
+    background-color: #3c94e7; /* Blue for cancelled */
+    color: #fff;
+}
