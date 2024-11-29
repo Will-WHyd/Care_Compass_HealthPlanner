@@ -10,5 +10,5 @@ class ApptList(generic.ListView):
     Displays list of appointments
     """
     queryset = Appointment.objects.all()
-    template_name = 'appt/appt_list.html'
+    template_name = 'appt/index.html'
 
