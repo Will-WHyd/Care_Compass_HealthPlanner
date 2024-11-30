@@ -5,6 +5,7 @@
 {% url 'account_login' as login_url %}
 {% url 'account_signup' as signup_url %}
 {% url 'account_logout' as logout_url %}
+{% url 'create_appt' as create_url %}
 
 <!DOCTYPE html>
 <html class="h-100" lang="en">
@@ -49,6 +50,10 @@
                     <li class="nav-item">
                         <a class="nav-link {% if request.path == logout_url %}active{% endif %}" aria-current="page"
                             href="{% url 'account_logout' %}">Logout</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == create_url %}active{% endif %}" aria-current="page"
+                            href="{% url 'create_appt' %}">Create New Appointment</a>
                     </li>
                     {% else %}
                     <li class="nav-item">

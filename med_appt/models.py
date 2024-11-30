@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from datetime import datetime
+from django.utils import timezone
 
 STATUS = (
     ('Pending', 'Pending'),
@@ -26,8 +27,8 @@ class Appointment(models.Model):
     Stores a single Appointment related to :model:`auth.user`
     """
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    procedure = models.CharField(max_length=200, unique=True)
-    appt_date = models.DateField(default=datetime.now().date())
+    procedure = models.CharField(max_length=200)
+    appt_date = models.DateField(default=timezone.localdate)
     appt_time = models.TimeField(auto_now=False, auto_now_add=False)
     address = models.TextField(max_length=200, null=True, blank=True)
     consultant = models.ForeignKey(Consultant, null=False, blank=False, on_delete=models.CASCADE)

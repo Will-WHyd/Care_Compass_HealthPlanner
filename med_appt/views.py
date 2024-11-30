@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic
 from django.contrib import messages
 from django.http import HttpResponseRedirect
@@ -35,8 +35,9 @@ def appt_detail(request, id):
 
 @login_required
 def appt_create(request):
+    appt_form = AppointmentForm()
     if request.method == 'POST':
-        appt_form = AppointmentForm(request.Post)
+        appt_form = AppointmentForm(request.POST)
         if appt_form.is_valid():
             appointment = appt_form.save(commit=False)
             appointment.user = request.user
@@ -46,8 +47,6 @@ def appt_create(request):
                 'New Appointment Created'
             )
             return redirect('index')
-        else:
-            appt_form = AppointmentForm()
 
     return render(request, 'appt/create_appt.html', {'appt_form': appt_form})
 
