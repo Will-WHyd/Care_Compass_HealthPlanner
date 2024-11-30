@@ -35,3 +35,6 @@ class Appointment(models.Model):
     details = models.TextField(null=True, blank=True)
     followup_details = models.TextField(null=True, blank=True)
     travel_details = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return f'Appointment for {self.procedure} on {self.appt_date} at {self.appt_time}.'
