@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <!-- Creating New Appointments -->
+    <div class="col-md-8 card mb-8 mt-6">
+        <div class="card-body">
+          {% if user.is_authenticated %}
+          <h2>Edit your Appointment</h2>
+          <p>Update your details below and click 'Submit'</p>
+
+          <form id="apptForm" method="POST" style="margin-top: 1.3em;">
+            {{ appt_form | crispy }}
+            {% csrf_token %}
+            <button id="submitButton" type="submit"
+              class="btn btn-signup btn-lg">Submit</button>
+          </form>
+          {% else %}
+          <p>Log in to create an appointment</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+</div>
+
+{% endblock %}

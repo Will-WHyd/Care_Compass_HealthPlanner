@@ -35,6 +35,9 @@ def appt_detail(request, id):
 
 @login_required
 def appt_create(request):
+    """
+    Creates a new instance of Appointment via form. 
+    """
     appt_form = AppointmentForm()
     if request.method == 'POST':
         appt_form = AppointmentForm(request.POST)
@@ -46,8 +49,30 @@ def appt_create(request):
                 request, messages.SUCCESS,
                 'New Appointment Created'
             )
-            return redirect('index')
+            return HttpResponseRedirect(reverse('appointments:detail', args=[appointment.id]))
 
     return render(request, 'appt/create_appt.html', {'appt_form': appt_form})
 
+@login_required
+def appt_edit(request, id):
+    """
+    Redirects from an appointment to a form page which allows editing and updating of appointment details. 
+    """
+    appt = get_object_or_404(Appointment, id=id)
 
+    if appt.user != request.user:
+        return render(request, "appt/403.html")
+    
+    if request.method == 'POST':
+        appt_form = AppointmentForm(request.POST, instance=appt)
+        if appt_form.is_valid():
+            appt_form.save()
+            messages.add_message(
+                request, messages.SUCCESS,
+                'Appointment Details Updated'
+            )
+            return redirect('appointments:detail', id=appt.id)
+    else:
+        appt_form = AppointmentForm(instance=appt)
+    
+    return render(request, 'appt/edit_appt.html', {'appt_form': appt_form, 'appt': appt})

@@ -14,7 +14,7 @@
                 <div class="col-md-4">
                     <div class="card mb-4">
                         <div class="card-body">
-                            <a href="{% url 'appt_detail' appt.id %}" class="post-link">
+                            <a href="{% url 'appointments:detail' appt.id %}" class="post-link">
                                 <h2 class="card-title">{{ appt.procedure }}</h2>
                                 <p class="card-text">Consultant: {{ appt.consultant }}</p>
                             </a>

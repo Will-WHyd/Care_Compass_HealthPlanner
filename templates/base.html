@@ -1,11 +1,11 @@
 {% load static %}
 
-{% url 'home' as home_url %}
+{% url 'appointments:home' as home_url %}
 
 {% url 'account_login' as login_url %}
 {% url 'account_signup' as signup_url %}
 {% url 'account_logout' as logout_url %}
-{% url 'create_appt' as create_url %}
+{% url 'create' as create_url %}
 
 <!DOCTYPE html>
 <html class="h-100" lang="en">
@@ -34,7 +34,7 @@
 <body class="d-flex flex-column h-100 main-bg">
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{% url 'home' %}"><span class="brand"><span class="red-o">Care</span><span
+            <a class="navbar-brand" href="{% url 'appointments:home' %}"><span class="brand"><span class="red-o">Care</span><span
                         class="thin">|Compass</span></span></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
                 aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,7 +44,7 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link {% if request.path == home_url %}active{% endif %}" aria-current="page"
-                            href="{% url 'home' %}">Home</a>
+                            href="{% url 'appointments:home' %}">Home</a>
                     </li>
                     {% if user.is_authenticated %}
                     <li class="nav-item">
@@ -53,7 +53,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {% if request.path == create_url %}active{% endif %}" aria-current="page"
-                            href="{% url 'create_appt' %}">Create New Appointment</a>
+                            href="{% url 'appointments:create' %}">Create New Appointment</a>
                     </li>
                     {% else %}
                     <li class="nav-item">

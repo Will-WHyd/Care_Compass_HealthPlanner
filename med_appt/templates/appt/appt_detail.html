@@ -58,6 +58,16 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="card col-md-8">
+            <button class="btn btn-delete" data-appt_id="{{ appt.id }}">Delete</button>
+            {% if appt.user == request.user %}
+                <a href="{% url 'appointments:edit' appt.id %}">
+                    <button class="btn btn-edit" data-cappt_id="{{ appt.id }}">Edit Appointment</button>
+                </a>
+            {% endif %}
+        </div>
+    </div>
 </div>
 
 
