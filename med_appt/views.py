@@ -49,14 +49,18 @@ def appt_create(request):
                 request, messages.SUCCESS,
                 'New Appointment Created'
             )
-            return HttpResponseRedirect(reverse('appointments:detail', args=[appointment.id]))
+            return redirect('appointments:detail', appointment.id)
 
     return render(request, 'appt/create_appt.html', {'appt_form': appt_form})
 
 @login_required
 def appt_edit(request, id):
     """
-    Redirects from an appointment to a form page which allows editing and updating of appointment details. 
+    Redirects from an appointment detail page to a form page which allows editing and updating of appointment details. 
+
+    **Context**
+    ``appt`` 
+        An instance of :model:`med_appt.Appointment`
     """
     appt = get_object_or_404(Appointment, id=id)
 
@@ -76,3 +80,17 @@ def appt_edit(request, id):
         appt_form = AppointmentForm(instance=appt)
     
     return render(request, 'appt/edit_appt.html', {'appt_form': appt_form, 'appt': appt})
+
+@login_required
+def appt_delete(request, id):
+    appt = get_object_or_404(Appointment, id=id)
+
+    if appt.user == request.user:
+        appt.delete()
+        messages.add_message(
+            request, messages.SUCCESS,
+            'Appointment Delete'
+            )
+        return redirect('home')
+    else:
+        return render(request, "appt/403.html")
