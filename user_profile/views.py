@@ -15,7 +15,7 @@ def profile_view(request):
     Displays an individual instance of :model: 'user_profile.Profile'
     """
 
-    profile = get_object_or_404(Profile.objects.filter(user=request.user).order_by('-updated_on'))
+    profile = get_object_or_404(Profile, user=request.user)
 
     return render(request, "profile/profile.html", {"profile": profile})
 
@@ -25,7 +25,7 @@ def edit_profile(request):
     Renders the profile settings edit page
     """
     template = "edit_profile.html"
-    profile = get_object_or_404(Profile.objects.filter(user=request.user).order_by('-updated_on'))
+    profile = get_object_or_404(Profile, user=request.user)
     profile_form = ProfileForm()
      
     if request.method == 'POST':
@@ -36,10 +36,10 @@ def edit_profile(request):
                 request, messages.SUCCESS,
                 'Profile Details Updated'
                 )
-            return redirect('profile')
+            return redirect('profile:profile')
         else:
             messages.error(request, form.errors)
-            return redirect('profile')
+            return redirect('profile:profile')
     else:
         profile_form = ProfileForm(instance=profile)
         

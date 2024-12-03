@@ -8,10 +8,10 @@ class Profile(models.Model):
     """
     Stores a single Profile page entry details
     """
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=50, null=False, blank=False)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=50, null=False, blank=False, default='New User')
     profile_image = CloudinaryField('image', default='placeholder')
-    contact_phone = PhoneNumberField(null=True)
+    contact_phone = PhoneNumberField(blank=True)
     contact_email = models.EmailField(blank=True, max_length=200)
     info = models.TextField(max_length=5000, blank=True)
     updated_on = models.DateTimeField(auto_now=True)
