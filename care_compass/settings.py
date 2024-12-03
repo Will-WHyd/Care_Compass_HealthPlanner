@@ -55,7 +55,9 @@ INSTALLED_APPS = [
     'django_summernote',
     'crispy_forms',
     'crispy_bootstrap5',
+    'phonenumber_field',
     'med_appt',
+    'user_profile',
 ]
 
 SITE_ID = 1

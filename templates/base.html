@@ -1,6 +1,7 @@
 {% load static %}
 
 {% url 'appointments:home' as home_url %}
+{% url 'profile:profile' as profile_url %}
 
 {% url 'account_login' as login_url %}
 {% url 'account_signup' as signup_url %}
@@ -46,6 +47,9 @@
                         <a class="nav-link {% if request.path == home_url %}active{% endif %}" aria-current="page"
                             href="{% url 'appointments:home' %}">Home</a>
                     </li>
+                    <li><a class="nav-link {% if request.path == profile_url %}active{% endif %}" aria-current="page"
+                        href="{% url 'profile:profile' %}">Profile</a>
+                    </li>
                     {% if user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link {% if request.path == logout_url %}active{% endif %}" aria-current="page"
@@ -77,10 +81,9 @@
         <div class="row">
             <div class="col-md-8 offset-md-2">
                 {% for message in messages %}
-                <div class="alert {{ message.tags }} alert-dismissible
-            fade show" id="msg" role="alert">
-                    {{ message | safe }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <div class="alert-{{ message.tags }} alert-dismissible fade show d-flex justify-content align-items-center" id="msg" role="alert">
+                    <span class="me-5 ps-3"> {{ message | safe }} </span>
+                    <button type="button" class="btn-close ms-auto close-msg-btn-custom" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
                 {% endfor %}
             </div>

@@ -89,8 +89,8 @@ def appt_delete(request, id):
         appt.delete()
         messages.add_message(
             request, messages.SUCCESS,
-            'Appointment Delete'
+            'Appointment Deleted!'
             )
-        return redirect('home')
+        return redirect('appointments:home')
     else:
         return render(request, "appt/403.html")
