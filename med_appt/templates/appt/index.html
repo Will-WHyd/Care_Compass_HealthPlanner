@@ -7,6 +7,7 @@
     <div class="row">
         <p>Test Display - index</p>
 
+        {% if user.is_authenticated %}
         <!-- Appointment List Column -->
         <div class="col-12 mt-3 left">
             <div class="row">
@@ -31,8 +32,14 @@
                 {% endif %}
                 {% endfor %}
 
+                {% if not object_list %}
+                <p>You have no appointments. Click 'Create an appointment' above to create your first appointment.</p>
+                {% endif %}
             </div>
         </div>
+        {% else %}
+        <p>Log in to create and view your appointments</p>
+        {% endif %}
     </div>
     {% if is_paginated %}
     <nav aria-label="Page navigation">

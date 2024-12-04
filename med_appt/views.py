@@ -8,7 +8,7 @@ from .models import Appointment, Consultant
 from .forms import AppointmentForm
 
 # Create your views here.
-class ApptList(LoginRequiredMixin, generic.ListView):
+class ApptList(generic.ListView):
     """
     Displays list of appointments belonging to the logged-in user
     """
@@ -16,7 +16,10 @@ class ApptList(LoginRequiredMixin, generic.ListView):
     template_name = 'appt/index.html'
 
     def get_queryset(self):
-        return Appointment.objects.filter(user=self.request.user).order_by('-appt_date')
+        if self.request.user.is_authenticated:
+            return Appointment.objects.filter(user=self.request.user).order_by('-appt_date')
+        else:
+            return Appointment.objects.none()
     paginate_by = 8
     
 @login_required
