@@ -157,10 +157,40 @@ body {
     border: none;
 }
 
+.alert-dismissible .close-msg-btn-custom {
+    position: relative;
+    top: auto;
+    right: auto;
+    z-index: 2;
+    padding: 0.75rem 1rem;
+}
+
 .faded {
     color: rgb(172, 175, 175);
 }
 
 .approval {
     color: rgb(222, 146, 168);
+}
+
+/* Table settings */
+
+.table th, .table td {
+    text-align: center;
+}
+.table tbody.status-pending {
+    background-color: #f1c40f; /* Yellow for pending */
+    color: #fff;
+}
+.table tbody.status-attended {
+    background-color: #2ecc71; /* Green for attended */
+    color: #fff;
+}
+.table tbody.status-cancelled {
+    background-color: #e74c3c; /* Red for cancelled */
+    color: #fff;
+}
+.table tbody.status-rescheduled {
+    background-color: #3c94e7; /* Blue for cancelled */
+    color: #fff;
 }
