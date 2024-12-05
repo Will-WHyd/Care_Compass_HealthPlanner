@@ -1,7 +1,7 @@
 
-body {
+/* body {
     background-color: #F9FAFC;
-}
+} */
 
 .brand {
     font-family: Lato, sans-serif;
@@ -18,17 +18,17 @@ body {
     font-weight: 300;
 }
 
-.light-bg {
+/* .light-bg {
     background-color: #fff;
 }
 
 .dark-bg {
     background-color: #445261;
-}
+} */
 
-.main-bg {
+/* .main-bg {
     background-color: #F9FAFC;
-}
+} */
 
 .card {
     border: none;
