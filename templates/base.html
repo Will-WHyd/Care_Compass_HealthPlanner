@@ -31,49 +31,54 @@
 
 </head>
 
-<body class="d-flex flex-column h-100 main-bg">
-    <div class="container-fluid h-100">
-        <div class="row h-100 body-row-zone">
+<body class="d-flex flex-column h-auto main-bg">
+    <div class="container-fluid">
+        <div class="row h-auto body-row-zone">
 
 
-    {% include 'navbar.html' %}
+            {% include 'navbar.html' %}
 
-    <!-- displaying Django messages -->
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 offset-md-2">
-                {% for message in messages %}
-                <div class="alert-{{ message.tags }} alert-dismissible fade show d-flex justify-content align-items-center"
-                    id="msg" role="alert">
-                    <span class="me-5 ps-3"> {{ message | safe }} </span>
-                    <button type="button" class="btn-close ms-auto close-msg-btn-custom" data-bs-dismiss="alert"
-                        aria-label="Close"></button>
+            <!-- displaying Django messages -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 offset-md-2">
+                        {% for message in messages %}
+                        <div class="alert-{{ message.tags }} alert-dismissible fade show d-flex justify-content align-items-center"
+                            id="msg" role="alert">
+                            <span class="me-5 ps-3"> {{ message | safe }} </span>
+                            <button type="button" class="btn-close ms-auto close-msg-btn-custom" data-bs-dismiss="alert"
+                                aria-label="Close"></button>
+                        </div>
+                        {% endfor %}
+                    </div>
                 </div>
-                {% endfor %}
             </div>
+            <main class="col-md-8 offset-md-4 flex-grow-1 flex-shrink-0 main-bg">
+                {% if user.is_authenticated %}
+                <p class="text-end m-3">You are logged in as {{ user }}</p>
+                {% else %}
+                <p class="text-end m-3">You are not logged in</p>
+                {% endif %}
+
+                <div class="col-10 mt-4 left">
+                    <div class="row">
+                        {% block content %}
+                        <!-- Content Goes here -->
+                        {% endblock content %}
+                    </div>
+                </div>
+
+
         </div>
     </div>
-    <main class="col-md-9 col-lg-9 offset-md-3 offset-lg-3 flex-grow-1 flex-shrink-0 main-bg">
-        {% if user.is_authenticated %}
-        <p class="text-end m-3">You are logged in as {{ user }}</p>
-        {% else %}
-        <p class="text-end m-3">You are not logged in</p>
-        {% endif %}
-
-        <div class="col-10 mt-4 left">
-            <div class="row">
-                {% block content %}
-                <!-- Content Goes here -->
-                {% endblock content %}
-            </div>
-        </div>
-        
-
-    </div>
-</div>
     </main>
 
-    {% include 'footer.html' %}
+    <div class="container">
+        <div class="row">
+            {% include 'footer.html' %}
+        </div>
+    </div>
+
 
 
 

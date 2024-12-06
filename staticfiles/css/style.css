@@ -1,3 +1,8 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
 body {
     display: flex;
     flex-direction: column;
@@ -7,6 +12,7 @@ body {
     position: fixed !important;
     z-index: 10;
     background-color: #abb6c2ff;
+    padding: 0.5rem;
 }
 
 /* Media queries */
