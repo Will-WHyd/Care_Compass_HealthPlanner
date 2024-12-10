@@ -6,6 +6,8 @@ from django.views import generic
 from django.http import HttpResponseRedirect
 from .forms import ProfileForm
 from .models import Profile
+from django.contrib.auth.models import User
+
 
 # Create your views here.
 
@@ -44,3 +46,17 @@ def edit_profile(request):
         profile_form = ProfileForm(instance=profile)
         
     return render(request, 'profile/edit_profile.html', {'profile_form': profile_form, 'profile': profile})
+
+@login_required
+def delete_account(request):
+    user = get_object_or_404(User, id=request.user.id)
+    profile = Profile.objects.all()
+
+    try:
+        profile.delete()
+        user.delete()
+        messages.success(request, 'Your account has been deleted successfully!')
+        return redirect('appointments:home')
+    except Exception as e: 
+        messages.error(request, 'Oops! Something went wrong!')
+        return redirect('appointments:home')

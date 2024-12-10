@@ -39,9 +39,9 @@
             {% include 'navbar.html' %}
 
             <!-- displaying Django messages -->
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-8 offset-md-2">
+                    <div class="col-md-8 offset-md-4">
                         {% for message in messages %}
                         <div class="alert-{{ message.tags }} alert-dismissible fade show d-flex justify-content align-items-center"
                             id="msg" role="alert">

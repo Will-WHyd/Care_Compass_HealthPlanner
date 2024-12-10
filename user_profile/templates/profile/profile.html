@@ -6,33 +6,64 @@
 {% block content %}
 <div class="container mt-5">
     <div class="row">
-        <div class="col-12 col-md-4 text-center">
-            {% if "placeholder" in profile.featured_image.url %}
-            <img src="{% static 'images/nobody.jpg' %}" alt="placeholder image" class="profile-image">
-            {% else %}
-            <img src="{{ profile.profile_image.url }}" alt="{{ about.title }}" class="profile-image">
-            {% endif %}
-        </div>
-        <div class="col-12 col-md-8">
-            <h2>{{ profile.name }}</h2>
-            {{ profile.info | safe }}
-            <h3>Contact Phone Number:</h3>
-            {{ profile.contact_phone }}
-            <h3>Contact Email:</h3>
-            {{ profile.contact_email }}
+        <div class="col-md-10 flex-grow-1 flex-shrink-0 main-bg">
+
+
+            <div class="col-12 col-md-4 text-center">
+                {% if "placeholder" in profile.featured_image.url %}
+                <img src="{% static 'images/nobody.jpg' %}" alt="placeholder image" class="profile-image">
+                {% else %}
+                <img src="{{ profile.profile_image.url }}" alt="{{ profile.name }}" class="profile-image">
+                {% endif %}
+            </div>
+            <div class="col-12 col-md-8 text-center">
+                <h2>{{ profile.name }}</h2>
+                {{ profile.info | safe }}
+                <h3>Contact Phone Number:</h3>
+                {{ profile.contact_phone }}
+                <h3>Contact Email:</h3>
+                {{ profile.contact_email }}
+            </div>
+
+            <div class="row">
+                <div class="col-md-8 text-center">
+                    {% if profile.user == request.user %}
+                    <a href="{% url 'profile:edit' %}">
+                        <button class="btn btn-edit" data-profile_id="{{ profile.id }}">Edit Profile</button>
+                    </a>
+
+                    <button class="btn btn-delete" data-bs-toggle="modal" data-bs-target="#deleteAccModal">Delete Account</button>
+
+                    {% endif %}
+                </div>
+            </div>
         </div>
     </div>
-    <div class="row">
-        <div class="card col-md-8">
-            {% if profile.user == request.user %}
-            <!-- <button class="btn btn-delete" data-profile_id="{{ profile.id }}">Delete</button> -->
 
-            <a href="{% url 'profile:edit' %}">
-                <button class="btn btn-edit" data-profile_id="{{ profile.id }}">Edit Profile</button>
-            </a>
-            {% endif %}
+</div>
+
+<!-- Delete confirmation modal -->
+<div class="modal fade" id="deleteAccModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-fullscreen modal-no-margin">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Delete Your Account?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                Are you sure you want to delete your CareCompass account?
+                If you delete your account you will loose access to <strong>both</strong> your profile
+                <strong>and</strong> your appointments!
+                This action <strong>cannot be undone,</strong> deleted data cannot be recovered.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No, go back</button>
+                <a id="deleteConfirm" href="{% url 'profile:deleteaccount' %}">
+                    <button type="button" class="btn
+            btn-danger">Yes, Delete my account</button>
+                </a>
+            </div>
         </div>
     </div>
-
 </div>
 {% endblock content %}
