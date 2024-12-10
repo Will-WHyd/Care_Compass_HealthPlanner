@@ -6,15 +6,14 @@
 
 <div class="container">
     <div class="row">
-        <!-- Editing Appointments -->
+        <!-- Creating New Consultants -->
     <div class="col-md-8 card mb-8 mt-6">
         <div class="card-body">
           {% if user.is_authenticated %}
-          <h2>Edit your Appointment</h2>
-          <p>Update your details below and click 'Submit'</p>
+          <h2>Create a new Appointment</h2>
 
-          <form id="apptForm" method="POST" style="margin-top: 1.3em;">
-            {{ appt_form | crispy }}
+          <form id="consultantForm" method="post" style="margin-top: 1.3em;">
+            {{ form | crispy }}
             {% csrf_token %}
             <button id="submitButton" type="submit"
               class="btn btn-signup btn-lg">Submit</button>

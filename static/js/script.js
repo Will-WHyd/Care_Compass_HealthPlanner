@@ -12,9 +12,16 @@ document.addEventListener("DOMContentLoaded", () => {
     for (let button of deleteButtons) {
         button.addEventListener("click", (e) => {
             console.log('Button clicked');
-            let apptId = e.target.getAttribute("data-appt_id");
-            console.log(apptId)
-            deleteConfirm.href = `/appointments/${apptId}/delete`;
+            let ObjID = e.target.getAttribute("data-id");
+            let modelType = e.target.getAttribute("data-model");
+
+            console.log(ObjID, modelType);
+            if (modelType === "appointment"){
+                deleteConfirm.href = `/appointments/${ObjID}/delete`;
+            } else if (modelType === "consultant"){
+                deleteConfirm.href = `/consultants/${ObjID}/delete`;
+            }
+            
             deleteModal.show();
         });
     }

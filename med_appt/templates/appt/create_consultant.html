@@ -6,21 +6,22 @@
 
 <div class="container">
     <div class="row">
-        <!-- Editing Appointments -->
+        <!-- Creating New Consultants -->
     <div class="col-md-8 card mb-8 mt-6">
         <div class="card-body">
           {% if user.is_authenticated %}
-          <h2>Edit your Appointment</h2>
-          <p>Update your details below and click 'Submit'</p>
+          <h2>Create a new Constultant record</h2>
+          <p>The consultant record you create will be used when you create appointments. </p>
+          <p>Your profile will include a list of consultants, past and present, who you have worked with.</p>
 
-          <form id="apptForm" method="POST" style="margin-top: 1.3em;">
-            {{ appt_form | crispy }}
+          <form id="consultantForm" method="post" style="margin-top: 1.3em;">
+            {{ form | crispy }}
             {% csrf_token %}
             <button id="submitButton" type="submit"
               class="btn btn-signup btn-lg">Submit</button>
           </form>
           {% else %}
-          <p>Log in to create an appointment</p>
+          <p>Log in to create a consultant.</p>
           {% endif %}
         </div>
       </div>

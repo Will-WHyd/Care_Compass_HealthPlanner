@@ -50,10 +50,12 @@ def edit_profile(request):
 @login_required
 def delete_account(request):
     user = get_object_or_404(User, id=request.user.id)
-    profile = get_object_or_404(Profile, user=request.user)
+
+    if user.is_superuser:
+        messages.error(request, 'Admin accounts cannot be deleted.')
+        return redirect('appointments:home')
 
     try:
-        profile.delete()
         user.delete()
         messages.success(request, 'Your account has been deleted successfully!')
         return redirect('appointments:home')

@@ -61,7 +61,7 @@
     <div class="row">
         <div class="card col-md-8">
             {% if appt.user == request.user %}
-            <button class="btn btn-delete" data-appt_id="{{ appt.id }}">Delete</button>
+            <button class="btn btn-delete" data-id="{{ appt.id }}" data-model="appointment">Delete</button>
             
                 <a href="{% url 'appointments:edit' appt.id %}">
                     <button class="btn btn-edit" data-cappt_id="{{ appt.id }}">Edit Appointment</button>
@@ -95,5 +95,5 @@
 {% endblock content %}
 
 {% block extras %}
-<script src="{% static 'js/appointments.js' %}"></script>
+<script src="{% static 'js/script.js' %}"></script>
 {% endblock %}
