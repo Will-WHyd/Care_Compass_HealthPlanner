@@ -50,7 +50,7 @@ def edit_profile(request):
 @login_required
 def delete_account(request):
     user = get_object_or_404(User, id=request.user.id)
-    profile = Profile.objects.all()
+    profile = get_object_or_404(Profile, user=request.user)
 
     try:
         profile.delete()

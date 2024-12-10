@@ -2,6 +2,8 @@ from django import forms
 from .models import Appointment
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
+from datetime import datetime
+
 
 class AppointmentForm(forms.ModelForm):
     class Meta:
@@ -17,8 +19,26 @@ class AppointmentForm(forms.ModelForm):
             "travel_details"
         ]
 
+        widgets = {
+            "appt_date": forms.DateInput(
+                attrs={
+                    'type': 'date',
+                    'class': 'form-control',
+                }
+            ),
+            "appt_time": forms.TimeInput(
+                attrs={'type': 'time',
+                    'class': 'form-control',
+                    'step': '300',}
+            ),
+        }
+    
+
     def __init__(self, *args, **kwargs):
         super(AppointmentForm, self).__init__(*args, **kwargs)
+        # set default time
+        self.fields['appt_date'].initial = datetime.now().date()
+
         self.helper = FormHelper()
         self.helper.form_method = 'POST'
         self.helper.add_input(Submit('submit', 'Create Appointment'))
