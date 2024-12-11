@@ -195,18 +195,22 @@ body {
 }
 .table tbody.status-pending {
     background-color: #f1c40f; /* Yellow for pending */
+    --bs-table-bg:#f1c40f;
     color: #fff;
 }
 .table tbody.status-attended {
     background-color: #2ecc71; /* Green for attended */
+    --bs-table-bg: #2ecc71;
     color: #fff;
 }
 .table tbody.status-cancelled {
     background-color: #e74c3c; /* Red for cancelled */
+    --bs-table-bg: #e74c3c;
     color: #fff;
 }
 .table tbody.status-rescheduled {
     background-color: #3c94e7; /* Blue for cancelled */
+    --bs-table-bg: #3c94e7;
     color: #fff;
 }
 

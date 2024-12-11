@@ -6,6 +6,7 @@ from django.views import generic
 from django.http import HttpResponseRedirect
 from .forms import ProfileForm
 from .models import Profile
+from med_appt.models import Consultant
 from django.contrib.auth.models import User
 
 
@@ -19,7 +20,17 @@ def profile_view(request):
 
     profile = get_object_or_404(Profile, user=request.user)
 
-    return render(request, "profile/profile.html", {"profile": profile})
+    if request.user.is_authenticated:
+        try:
+            public_consultants = Consultant.objects.filter(private=False)
+            private_consultants = Consultant.objects.filter(private=True, clients=profile) 
+            consultants = (public_consultants | private_consultants).distinct()
+        except Profile.DoesNotExist:
+            consultants = Consultant.objects.filter(private=False)
+    else:
+            consultants = Consultant.objects.filter(private=False)    
+
+    return render(request, "profile/profile.html", {"profile": profile, "consultants": consultants})
 
 @login_required
 def edit_profile(request):
