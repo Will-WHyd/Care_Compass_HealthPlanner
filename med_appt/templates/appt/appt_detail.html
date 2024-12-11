@@ -3,17 +3,15 @@
 
 {% block content %}
 
-<p>Test Display: post_detail</p>
-
 <div class="masthead">
     <div class="container">
         <div class="row g-0">
-            <div class="col-md-6 masthead-text">
+            <div class="col-md-8 masthead-text">
                 <h1 class="post-title">
                     {{ appt.procedure }}
                 </h1>
                 <p class="post-subtitle">
-                    Consultant: {{ appt.consultant }} 
+                    Consultant: {{ appt.consultant }}
                 </p>
             </div>
         </div>
@@ -58,39 +56,42 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="card col-md-8">
-            {% if appt.user == request.user %}
-            <button class="btn btn-delete" data-id="{{ appt.id }}" data-model="appointment">Delete</button>
-            
-                <a href="{% url 'appointments:edit' appt.id %}">
-                    <button class="btn btn-edit" data-cappt_id="{{ appt.id }}">Edit Appointment</button>
-                </a>
-            {% endif %}
+
+    {% if appt.user == request.user %}
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <a href="{% url 'appointments:edit' appt.id %}" class="d-block">
+                <button class="btn btn-edit w-100" data-cappt_id="{{ appt.id }}">Edit Appointment</button>
+            </a>
+        </div>
+        <div class="col-md-4">
+            <button class="btn btn-delete w-100" data-id="{{ appt.id }}" data-model="appointment">Delete</button>
         </div>
     </div>
+    {% endif %}
+
 </div>
 
 <!-- Delete confirmation modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="deleteModalLabel">Delete Appointment?</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          Are you sure you want to delete your appointment?
-          This action cannot be undone.
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <a id="deleteConfirm" href="#" class="btn
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Delete Appointment?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete your appointment?
+                This action cannot be undone.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <a id="deleteConfirm" href="#" class="btn
             btn-danger">Delete</a>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
+</div>
 
 {% endblock content %}
 

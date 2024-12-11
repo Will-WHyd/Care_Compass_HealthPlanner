@@ -41,9 +41,9 @@
                 <!-- displaying Django messages -->
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-8 offset-md-4">
+                        <div class="col-md-8">
                             {% for message in messages %}
-                            <div class="alert-{{ message.tags }} alert-dismissible fade show d-flex justify-content align-items-center"
+                            <div class="alert-{{ message.tags }} alert-dismissible fade show"
                                 id="msg" role="alert">
                                 <span class="me-5 ps-3"> {{ message | safe }} </span>
                                 <button type="button" class="btn-close ms-auto close-msg-btn-custom"
@@ -64,7 +64,7 @@
                     <p class="text-end m-3">You are not logged in</p>
                     {% endif %}
 
-                    <div class="col-10 mt-4 left">
+                    <div class="col-md-10 mt-4 left">
                         <div class="row">
                             {% block content %}
                             <!-- Content Goes here -->
@@ -77,8 +77,10 @@
 
 
 
-
-        {% include 'footer.html' %}
+        <div class="offset-md-3">
+            {% include 'footer.html' %}
+        </div>
+        
 
     </div>
 

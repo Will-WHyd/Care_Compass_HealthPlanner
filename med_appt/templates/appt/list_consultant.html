@@ -2,35 +2,44 @@
     {% if user.is_authenticated %}
     <!-- Appointment List Column -->
     <div>
-        <div>
-            {% for consultant in object_list %}
-            <div class="col-10">
+        <div class="row justify-content-center">
+            {% for consultant in consultants %}
+            <div class="col-md-10 mb-3">
                 <div class="card mb-10">
-                    <h2 class="card-title">{{ consultant.name }}</h2>
-                    <p class="card-text">Instiution: {{ consultant.institution }}</p>
-                    <p class="card-text">Specialty: {{consultant.specialty}} </p>
-                    <hr>
-                    <p class="card-text text-muted h6">{{ consultant.email }} </p>
-                    <p class="card-text text-muted h6">{{ consultant.contact_phone }} </p>
-                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapse-{{consultant.id}}">More...</button>
-                    <div class="collapse" id="collapse-{{consultant.id}}">
-                        <div class="card-body">
-                            <p class="card-text">{{ consultant.details }} </p>
-                            {% if consultant.user == request.user %}
-                            <button class="btn btn-delete" data-id="{{ consultant.id }}"
-                                data-model="consultant">Delete</button>
-                            <a href="{% url 'appointments:consultant_edit' consultant.id %}">
-                                <button class="btn btn-edit" data-cappt_id="{{ consultant.id }}">Edit</button>
-                            </a>
+                    <h3 class="card-title">{{ consultant.name }}</h2>
+                        <p class="card-subtitle text-body-secondary">Instiution: {{ consultant.institution }}</p>
+                        <p class="card-subtitle text-body-secondary">Specialty: {{consultant.specialty}} </p>
+                        <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse-{{consultant.id}}">More...</button>
+                        <div class="collapse" id="collapse-{{consultant.id}}">
+                            <div class="card-body">
+                                <p class="card-text text-muted h6">{{ consultant.email }} </p>
+                                <p class="card-text text-muted h6">{{ consultant.contact_phone }} </p>
+                                <p class="card-text">{{ consultant.details }} </p>
+
+                                {% if consultant.user == request.user %}
+                                <div class="row justify-content-center">
+                                    <div class="col-md-4">
+                                        <a href="{% url 'appointments:consultant_edit' consultant.id %}"
+                                            class="d-block">
+                                            <button class="btn btn-edit w-100"
+                                                data-cappt_id="{{ consultant.id }}">Edit</button>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button class="btn btn-delete w-100" data-id="{{ consultant.id }}"
+                                            data-model="consultant">Delete</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                            {% endif %}
                         </div>
-                        {% endif %}
-                    </div>
                 </div>
             </div>
             {% endfor %}
 
-            {% if not object_list %}
+            {% if not consultants %}
             <p>You have no consultants.</p>
             {% endif %}
         </div>
@@ -74,5 +83,3 @@
         </div>
     </div>
 </div>
-
-

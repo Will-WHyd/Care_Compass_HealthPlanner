@@ -4,46 +4,47 @@
 
 
 {% block content %}
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-md-10 flex-grow-1 flex-shrink-0 main-bg">
+<div class="container-fluid mt-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-4 text-center">
+            {% if "placeholder" in profile.featured_image.url %}
+            <img src="{% static 'images/nobody.jpg' %}" alt="placeholder image" class="profile-image">
+            {% else %}
+            <img src="{{ profile.profile_image.url }}" alt="{{ profile.name }}" class="profile-image">
+            {% endif %}
+        </div>
+        <div class="col-12 col-md-8 text-center">
+            <h2>{{ profile.name }}</h2>
+            {{ profile.info | safe }}
+            <h3>Contact Phone Number:</h3>
+            {{ profile.contact_phone }}
+            <h3>Contact Email:</h3>
+            {{ profile.contact_email }}
+        </div>
+        <hr>
+        <div class="col-12 col-md-3 text-center">
+            <h2>Consultants</h2>
+        </div>
+        <div class="col-12 col-md-8 text-center">
+            {% include 'appt/list_consultant.html' with consultants=consultants %}
+        </div>
 
+    </div>
+    <br>
 
-            <div class="col-12 col-md-4 text-center">
-                {% if "placeholder" in profile.featured_image.url %}
-                <img src="{% static 'images/nobody.jpg' %}" alt="placeholder image" class="profile-image">
-                {% else %}
-                <img src="{{ profile.profile_image.url }}" alt="{{ profile.name }}" class="profile-image">
-                {% endif %}
-            </div>
-            <div class="col-12 col-md-8 text-center">
-                <h2>{{ profile.name }}</h2>
-                {{ profile.info | safe }}
-                <h3>Contact Phone Number:</h3>
-                {{ profile.contact_phone }}
-                <h3>Contact Email:</h3>
-                {{ profile.contact_email }}
-            </div>
-
-            <div class="col-12 col-md-8 text-center">
-                <h2>Consultants</h2>
-                {% include 'appt/list_consultant.html' with consultants=consultants %}
-            </div>
-
-            <div class="row">
-                <div class="col-md-8 text-center">
-                    {% if profile.user == request.user %}
-                    <a href="{% url 'profile:edit' %}">
-                        <button class="btn btn-edit" data-profile_id="{{ profile.id }}">Edit Profile</button>
-                    </a>
-
-                    <button class="btn btn-delete" data-bs-toggle="modal" data-bs-target="#deleteAccModal">Delete Account</button>
-
-                    {% endif %}
-                </div>
-            </div>
+    {% if profile.user == request.user %}
+    <div class="row justify-content-center">
+        <div class="col-md-4 mt-2">
+            <a href="{% url 'profile:edit' %}" class="d-block">
+                <button class="btn btn-edit w-100" data-profile_id="{{ profile.id }}">Edit Profile</button>
+            </a>
+        </div>
+        <div class="col-md-4 mt-2">
+            <button class="btn btn-delete w-100" data-bs-toggle="modal" data-bs-target="#deleteAccModal">Delete
+                Account</button>
         </div>
     </div>
+    {% endif %}
 
 </div>
 
