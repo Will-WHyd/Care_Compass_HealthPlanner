@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 from .models import Appointment, Consultant
 from user_profile.models import Profile
-from .forms import AppointmentForm
+from .forms import AppointmentForm, ConsultantForm
 
 # Create your views here.
 class ApptList(generic.ListView):

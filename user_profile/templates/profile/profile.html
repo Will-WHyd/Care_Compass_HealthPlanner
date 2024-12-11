@@ -25,6 +25,11 @@
                 {{ profile.contact_email }}
             </div>
 
+            <div class="col-12 col-md-8 text-center">
+                <h2>Consultants</h2>
+                {% include 'appt/list_consultant.html' %}
+            </div>
+
             <div class="row">
                 <div class="col-md-8 text-center">
                     {% if profile.user == request.user %}
@@ -67,3 +72,7 @@
     </div>
 </div>
 {% endblock content %}
+
+{% block extras %}
+<script src="{% static 'js/script.js' %}"></script>
+{% endblock %}

@@ -1,49 +1,44 @@
-{% extends "base.html" %}
-{% load static %}
-
-{% block content %}
-<!-- index.html content starts here -->
-<div class="container-fluid">
-    <div class="row">
-        {% if user.is_authenticated %}
-        <!-- Appointment List Column -->
-        <div class="col-12 mt-3 left">
-            <div class="row">
-                {% for consultant in object_list %}
-                <div class="col-10 col-md-6 col-lg-4">
-                    <div class="card mb-10">
-                        <h2 class="card-title">{{ consultant.name }}</h2>
-                        <p class="card-text">Instiution: {{ consultant.institution }}</p>
-                        <p class="card-text">Specialty: {{consultant.specialty}} </p>
-                        <hr>
-                        <p class="card-text text-muted h6">{{ consultant.email }} </p>
-                        <p class="card-text text-muted h6">{{ consultant.contact_phone }} </p>
-                        <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapse-{{consultant.id}}">More...</button>
-                        <div class="collapse" id="collapse-{{consultant.id}}">
-                            <div class="card-body">
-                                <p class="card-text">{{ consultant.details }} </p>
-                                {% if consultant.user == request.user %}
-                                <button class="btn btn-delete" data-id="{{ consultant.id }}" data-model="consultant">Delete</button>
-                                <a href="{% url 'appointments:consultant_edit' consultant.id %}">
-                                    <button class="btn btn-edit" data-cappt_id="{{ consultant.id }}">Edit</button>
-                                </a>
-                            </div>
-                            {% endif %}
+<div>
+    {% if user.is_authenticated %}
+    <!-- Appointment List Column -->
+    <div>
+        <div>
+            {% for consultant in object_list %}
+            <div class="col-10">
+                <div class="card mb-10">
+                    <h2 class="card-title">{{ consultant.name }}</h2>
+                    <p class="card-text">Instiution: {{ consultant.institution }}</p>
+                    <p class="card-text">Specialty: {{consultant.specialty}} </p>
+                    <hr>
+                    <p class="card-text text-muted h6">{{ consultant.email }} </p>
+                    <p class="card-text text-muted h6">{{ consultant.contact_phone }} </p>
+                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapse-{{consultant.id}}">More...</button>
+                    <div class="collapse" id="collapse-{{consultant.id}}">
+                        <div class="card-body">
+                            <p class="card-text">{{ consultant.details }} </p>
+                            {% if consultant.user == request.user %}
+                            <button class="btn btn-delete" data-id="{{ consultant.id }}"
+                                data-model="consultant">Delete</button>
+                            <a href="{% url 'appointments:consultant_edit' consultant.id %}">
+                                <button class="btn btn-edit" data-cappt_id="{{ consultant.id }}">Edit</button>
+                            </a>
                         </div>
+                        {% endif %}
                     </div>
                 </div>
-                {% endfor %}
-
-                {% if not object_list %}
-                <p>You have no consultants.</p>
-                {% endif %}
             </div>
+            {% endfor %}
+
+            {% if not object_list %}
+            <p>You have no consultants.</p>
+            {% endif %}
         </div>
-        {% else %}
-        <p>Log in to create and view your consultants</p>
-        {% endif %}
     </div>
+    {% else %}
+    <p>Log in to create and view your consultants</p>
+    {% endif %}
+
     {% if is_paginated %}
     <nav aria-label="Page navigation">
         <ul class="pagination justify-content-center">
@@ -57,12 +52,6 @@
         </ul>
     </nav>
     {% endif %}
-</div>
-
-
-<div class="row">
-
-</div>
 </div>
 
 <!-- Delete confirmation modal -->
@@ -86,8 +75,4 @@
     </div>
 </div>
 
-{% endblock content %}
 
-{% block extras %}
-<script src="{% static 'js/script.js' %}"></script>
-{% endblock %}
