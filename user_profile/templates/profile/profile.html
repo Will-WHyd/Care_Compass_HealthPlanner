@@ -6,20 +6,28 @@
 {% block content %}
 <div class="container-fluid mt-5">
     <div class="row justify-content-center">
-        <div class="col-12 col-md-4 text-center">
+        <!-- <div class="col-12 col-md-4 text-center">
             {% if "placeholder" in profile.featured_image.url %}
             <img src="{% static 'images/nobody.jpg' %}" alt="placeholder image" class="profile-image">
             {% else %}
             <img src="{{ profile.profile_image.url }}" alt="{{ profile.name }}" class="profile-image">
             {% endif %}
-        </div>
+        </div> -->
         <div class="col-12 col-md-8 text-center">
             <h2>{{ profile.name }}</h2>
-            {{ profile.info | safe }}
-            <h3>Contact Phone Number:</h3>
-            {{ profile.contact_phone }}
-            <h3>Contact Email:</h3>
-            {{ profile.contact_email }}
+            <p>
+                {{ profile.info | safe }}
+            </p>
+            <h4>Contact Phone Number:</h3>
+                <p>
+                    {{ profile.contact_phone }}
+                </p>
+
+                <h4>Contact Email:</h3>
+                    <p>
+                        {{ profile.contact_email }}
+                    </p>
+
         </div>
         <hr>
         <div class="col-12 col-md-3 text-center">

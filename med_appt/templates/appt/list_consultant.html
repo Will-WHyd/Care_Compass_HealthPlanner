@@ -1,49 +1,57 @@
 <div>
     {% if user.is_authenticated %}
     <!-- Appointment List Column -->
-    <div>
-        <div class="row justify-content-center">
-            {% for consultant in consultants %}
-            <div class="col-md-10 mb-3">
-                <div class="card mb-10">
-                    <h3 class="card-title">{{ consultant.name }}</h2>
-                        <p class="card-subtitle text-body-secondary">Instiution: {{ consultant.institution }}</p>
-                        <p class="card-subtitle text-body-secondary">Specialty: {{consultant.specialty}} </p>
-                        <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+    <div class="row justify-content-center">
+        {% for consultant in consultants %}
+        <div class="col-md-10 mb-3">
+
+            <div class="card mb-10">
+                <div class="row">
+                    <div class="col-md-9">
+                        <h3 class="card-title pt-2 pb-2">{{ consultant.name }}</h2>
+                            <p class="card-subtitle text-body-secondary">Instiution: {{ consultant.institution }}
+                            </p>
+                            <p class="card-subtitle text-body-secondary">Specialty: {{consultant.specialty}} </p>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-primary h-100" type="button" data-bs-toggle="collapse"
                             data-bs-target="#collapse-{{consultant.id}}">More...</button>
-                        <div class="collapse" id="collapse-{{consultant.id}}">
-                            <div class="card-body">
-                                <p class="card-text text-muted h6">{{ consultant.email }} </p>
-                                <p class="card-text text-muted h6">{{ consultant.contact_phone }} </p>
-                                <p class="card-text">{{ consultant.details }} </p>
+                    </div>
 
-                                {% if consultant.user == request.user %}
-                                <div class="row justify-content-center">
-                                    <div class="col-md-4">
-                                        <a href="{% url 'appointments:consultant_edit' consultant.id %}"
-                                            class="d-block">
-                                            <button class="btn btn-edit w-100"
-                                                data-cappt_id="{{ consultant.id }}">Edit</button>
-                                        </a>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <button class="btn btn-delete w-100" data-id="{{ consultant.id }}"
-                                            data-model="consultant">Delete</button>
-                                    </div>
+
+                    <div class="collapse" id="collapse-{{consultant.id}}">
+                        <div class="card-body">
+                            <hr>
+                            <p class="card-text text-muted h6">{{ consultant.email }} </p>
+                            <p class="card-text text-muted h6">{{ consultant.contact_phone }} </p>
+                            <p class="card-text">{{ consultant.details }} </p>
+
+                            {% if consultant.user == request.user %}
+                            <div class="row justify-content-center">
+                                <div class="col-md-4">
+                                    <a href="{% url 'appointments:consultant_edit' consultant.id %}" class="d-block">
+                                        <button class="btn btn-edit w-100"
+                                            data-cappt_id="{{ consultant.id }}">Edit</button>
+                                    </a>
                                 </div>
-
+                                <div class="col-md-4">
+                                    <button class="btn btn-delete w-100" data-id="{{ consultant.id }}"
+                                        data-model="consultant">Delete</button>
+                                </div>
                             </div>
-                            {% endif %}
                         </div>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
-            {% endfor %}
-
-            {% if not consultants %}
-            <p>You have no consultants.</p>
-            {% endif %}
         </div>
+        {% endfor %}
+
+        {% if not consultants %}
+        <p>You have no consultants.</p>
+        {% endif %}
     </div>
+
     {% else %}
     <p>Log in to create and view your consultants</p>
     {% endif %}
