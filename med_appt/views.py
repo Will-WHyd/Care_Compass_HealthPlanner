@@ -121,37 +121,37 @@ def appt_delete(request, id):
 #     return render(request, "appt/list_consultant.html", {"consultants": consultants})
 
 
-class ConsultList(generic.ListView):
-    """
-    Displays list of consultants
-    """
+# class ConsultList(generic.ListView):
+#     """
+#     Displays list of consultants
+#     """
 
-    model = Consultant
-    template_name = 'appt/list_consultant.html'
-    paginate_by = 8
+#     model = Consultant
+#     template_name = 'appt/list_consultant.html'
+#     paginate_by = 8
 
-    def get_queryset(self):
-        if self.request.user.is_authenticated:
-            try:
-                profile = Profile.objects.get(user=self.request.user)
+#     def get_queryset(self):
+#         if self.request.user.is_authenticated:
+#             try:
+#                 profile = Profile.objects.get(user=self.request.user)
 
-                public_consultants = Consultant.objects.filter(private=False)
-                private_consultants = Consultant.objects.filter(private=True, clients=profile)
+#                 public_consultants = Consultant.objects.filter(private=False)
+#                 private_consultants = Consultant.objects.filter(private=True, clients=profile)
 
-                consultants = public_consultants | private_consultants
-                consultants = consultants.distinct()
-            except Profile.DoesNotExist:
-                consultants = Consultant.objects.filter(private=False)
-        else:
-            consultants = Consultant.objects.filter(private=False)
+#                 consultants = public_consultants | private_consultants
+#                 consultants = consultants.distinct()
+#             except Profile.DoesNotExist:
+#                 consultants = Consultant.objects.filter(private=False)
+#         else:
+#             consultants = Consultant.objects.filter(private=False)
 
-        return consultants
+#         return consultants
 
 
 @login_required
 def consultant_create(request):
     """
-    Creates a new instance of Appointment via form. 
+    Creates a new instance of Consultant via form. 
     """
     form = ConsultantForm()
     if request.method == 'POST':
@@ -164,7 +164,7 @@ def consultant_create(request):
                 request, messages.SUCCESS,
                 'New Consultant Created'
             )
-            return redirect('appt/list_consultant.html', appointment.id)
+            return redirect('profile:profile')
 
     return render(request, 'appt/create_consultant.html', {'form': form,})
 
@@ -177,22 +177,22 @@ def consultant_edit(request, id):
         return render(request, "appt/403.html")
     
     if request.method == 'POST':
-        form = ConsultantForm(request.POST, instance=appt)
+        form = ConsultantForm(request.POST, instance=consultant)
         if form.is_valid():
             form.save()
             messages.add_message(
                 request, messages.SUCCESS,
                 'Consultant Details Updated'
             )
-            return redirect('appt/list_consultant.html', id=consultant.id)
+            return redirect('profile:profile')
     else:
         form = ConsultantForm(instance=consultant)
     
     return render(request, 'appt/edit_consultant.html', {'form': form, 'consultant': consultant})
 
 @login_required
-def consultant_delete(request):
-    consultant = get_object_or_404(Consultant, id)
+def consultant_delete(request, id):
+    consultant = get_object_or_404(Consultant, id=id)
 
     if consultant.user == request.user:
         consultant.delete()
@@ -200,6 +200,6 @@ def consultant_delete(request):
             request, messages.SUCCESS,
             'Consultant Deleted!'
             )
-        return redirect('appt/list_consultant.html')
+        return redirect('profile:profile')
     else:
         return render(request, "appt/403.html")

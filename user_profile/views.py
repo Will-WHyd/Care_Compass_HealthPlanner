@@ -8,6 +8,8 @@ from .forms import ProfileForm
 from .models import Profile
 from med_appt.models import Consultant
 from django.contrib.auth.models import User
+from itertools import chain
+
 
 
 # Create your views here.
@@ -24,7 +26,7 @@ def profile_view(request):
         try:
             public_consultants = Consultant.objects.filter(private=False)
             private_consultants = Consultant.objects.filter(private=True, clients=profile) 
-            consultants = (public_consultants | private_consultants).distinct()
+            consultants = list(chain(public_consultants, private_consultants))
         except Profile.DoesNotExist:
             consultants = Consultant.objects.filter(private=False)
     else:

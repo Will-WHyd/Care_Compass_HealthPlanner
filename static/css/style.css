@@ -17,7 +17,6 @@ body {
     background-size: cover; 
     background-position: center; 
     background-attachment: fixed; 
-    position: relative; 
 }
 
 body::before {
@@ -37,9 +36,28 @@ main {
     padding: 20px;
 }
 
+/* Make sure modal is on top */
+.modal {
+    z-index: 1060 !important; /* Modal on top of backdrop */
+    position: fixed !important; /* Ensure it's positioned relative */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Backdrop should be behind */
+.modal-backdrop {
+    z-index: 1050 !important; /* Lower z-index */
+    position: absolute !important; /* Ensure it is positioned correctly */
+}
+
+.modal-content {
+    overflow: visible; /* Prevent clipping */
+}
+
 .navbar {
     position: fixed !important;
-    z-index: 10;
+    z-index: 100;
     background-color: #abb6c2ff;
     padding: 0.5rem;
 }

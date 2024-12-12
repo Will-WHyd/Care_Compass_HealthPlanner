@@ -43,9 +43,10 @@ class AppointmentForm(forms.ModelForm):
         self.helper.form_method = 'POST'
         self.helper.add_input(Submit('submit', 'Create Appointment'))
 
+
 class ConsultantForm(forms.ModelForm):
     class Meta:
-        model: Consultant
+        model = Consultant
         fields = [
             "name",
             "specialty",

@@ -14,6 +14,7 @@ class ApptAdmin(SummernoteModelAdmin):
 class ConsultantAdmin(admin.ModelAdmin):
     list_display = ('name', 'specialty', 'institution')
     list_filter = ['name', 'specialty', 'institution']
+    filter_horizontal = ['clients']
 
     def has_delete_permission(self, request, obj=None):
         if obj and obj.user == request.user:

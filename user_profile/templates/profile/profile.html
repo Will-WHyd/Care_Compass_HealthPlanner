@@ -18,20 +18,26 @@
             <p>
                 {{ profile.info | safe }}
             </p>
-            <h4>Contact Phone Number:</h3>
-                <p>
-                    {{ profile.contact_phone }}
-                </p>
+            <h3>Contact Phone Number:</h3>
+            <p>
+                {{ profile.contact_phone }}
+            </p>
 
-                <h4>Contact Email:</h3>
-                    <p>
-                        {{ profile.contact_email }}
-                    </p>
+            <h3>Contact Email:</h3>
+            <p>
+                {{ profile.contact_email }}
+            </p>
 
         </div>
         <hr>
         <div class="col-12 col-md-3 text-center">
             <h2>Consultants</h2>
+            <p>You can add or edit consultants here. Consultants selected for your appointments will be added to this list. </p>
+            <p>You can edit or remove consultants by clicking on the 'More. button beside their name.</p>
+            <p>You can add new consultants with the button below.</p>
+            <a href="{% url 'appointments:consultant_create' %}" class="d-block">
+                <button class="btn btn-light w-100">Add Consultant</button>
+            </a>
         </div>
         <div class="col-12 col-md-8 text-center">
             {% include 'appt/list_consultant.html' with consultants=consultants %}
@@ -48,7 +54,7 @@
             </a>
         </div>
         <div class="col-md-4 mt-2">
-            <button class="btn btn-delete w-100" data-bs-toggle="modal" data-bs-target="#deleteAccModal">Delete
+            <button class="btn btn-danger w-100" data-bs-toggle="modal" data-bs-target="#deleteAccModal">Delete
                 Account</button>
         </div>
     </div>
@@ -56,30 +62,6 @@
 
 </div>
 
-<!-- Delete confirmation modal -->
-<div class="modal fade" id="deleteAccModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-fullscreen modal-no-margin">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deleteModalLabel">Delete Your Account?</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body text-center">
-                Are you sure you want to delete your CareCompass account?
-                If you delete your account you will loose access to <strong>both</strong> your profile
-                <strong>and</strong> your appointments!
-                This action <strong>cannot be undone,</strong> deleted data cannot be recovered.
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No, go back</button>
-                <a id="deleteConfirm" href="{% url 'profile:deleteaccount' %}">
-                    <button type="button" class="btn
-            btn-danger">Yes, Delete my account</button>
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
 {% endblock content %}
 
 {% block extras %}

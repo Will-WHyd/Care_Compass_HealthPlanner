@@ -1,12 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-
     const deleteModal = new bootstrap.Modal(document.getElementById("deleteModal"));
     const deleteButtons = document.getElementsByClassName("btn-delete");
-    const deleteConfirm = document.getElementById("deleteConfirm");
+    const deleteConfirm = deleteModal._element.querySelector("#deleteConfirm");
     
     document.getElementById("deleteModal").addEventListener("hidden.bs.modal", () => {
         deleteConfirm.href = "#"; // Reset the href
+        
     });
     
     for (let button of deleteButtons) {
@@ -19,9 +19,11 @@ document.addEventListener("DOMContentLoaded", () => {
             if (modelType === "appointment"){
                 deleteConfirm.href = `/appointments/${ObjID}/delete`;
             } else if (modelType === "consultant"){
-                deleteConfirm.href = `/consultants/${ObjID}/delete`;
+                deleteConfirm.href = `/consultant/${ObjID}/delete`;
+                
             }
-            
+            console.log(deleteConfirm.href)
+
             deleteModal.show();
         });
     }
@@ -33,3 +35,4 @@ document.addEventListener("DOMContentLoaded", () => {
         let alert = new bootstrap.Alert(messages);
         alert.close();
     }, 3000);
+
