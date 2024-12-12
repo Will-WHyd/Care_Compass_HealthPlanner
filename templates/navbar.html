@@ -1,9 +1,9 @@
-
 <nav class="navbar navbar-expand-md navbar-light bg-white col-md-3 flex-column">
-    <div>
+    <div class="flex-grow-1">
         <!-- Groups all navbar elements together for column display. Remove this if you want elements spread out -->
         <a class="navbar-brand" href="{% url 'appointments:home' %}"><span class="brand"><span
-                    class="red-o">Care</span><span class="thin"> <i class="fa-regular fa-compass"></i> Compass</span></span></a>
+                    class="red-o">Care</span><span class="thin"> <i class="fa-regular fa-compass"></i>
+                    Compass</span></span></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
             aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -36,9 +36,17 @@
                     <a class="nav-link {% if request.path == login_url %}active{% endif %}" aria-current="page"
                         href="{% url 'account_login' %}">Login</a>
                 </li>
+
                 {% endif %}
             </ul>
 
         </div>
+    </div>
+    <div>
+        {% if user.is_authenticated %}
+        <p class="text-end m-1 m-md-3 nav-p">You are logged in as {{ user }}</p>
+        {% else %}
+        <p class="text-end m-1 m-md-3 nav-p">You are not logged in</p>
+        {% endif %}
     </div>
 </nav>

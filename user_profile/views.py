@@ -11,7 +11,6 @@ from django.contrib.auth.models import User
 from itertools import chain
 
 
-
 # Create your views here.
 
 def profile_view(request):

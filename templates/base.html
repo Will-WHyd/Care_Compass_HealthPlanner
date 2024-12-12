@@ -41,7 +41,7 @@
                 <!-- displaying Django messages -->
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-6">
                             {% for message in messages %}
                             <div class="alert-{{ message.tags }} alert-dismissible fade show"
                                 id="msg" role="alert">
@@ -54,16 +54,7 @@
                     </div>
                 </div>
 
-
-
-
                 <div class="container">
-                    {% if user.is_authenticated %}
-                    <p class="text-end m-3">You are logged in as {{ user }}</p>
-                    {% else %}
-                    <p class="text-end m-3">You are not logged in</p>
-                    {% endif %}
-
                     <div class="col-md-10 mt-4 left">
                         <div class="row">
                             {% block content %}
