@@ -13,46 +13,59 @@ body {
     height: 100%;
     min-height: 80vh;
 
-    background-image: url('/images/compass2.webp');
+    background-image: url('/static/images/compass2.webp');
     background-size: cover; 
     background-position: center; 
     background-attachment: fixed; 
-    position: relative; 
 }
 
 body::before {
     content: "";
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(32, 55, 76, 0.2); /* Blue color with 20% transparency */
+    background-color: rgba(32, 55, 76, 0.7); /* Blue color with 30% transparency */
     z-index: 1;
 }
 
+
+
 main {
-    z-index: 2; /* Ensure content appears above the overlay */
+    z-index: 3; /* Ensure content appears above the overlay */
     position: relative;
     padding: 20px;
 }
 
+footer {
+    z-index: 2;
+    color: #abb6c2ff;
+
+    position: relative;
+}
+
 .navbar {
     position: fixed !important;
-    z-index: 10;
+    z-index: 100;
     background-color: #abb6c2ff;
     padding: 0.5rem;
 }
 
+/* setting color of p in navbar */
+.navbar .nav-p {
+    color: #212529ff;
+}
+
 .brand {
     font-family: Lato, sans-serif;
-    font-size: 1.4rem;
+    font-size: 2rem;
     font-weight: 700;
     color: #212529ff;
 }
 
 .red-o {
-    color: #E84610;
+    color: #df6919ff;
 }
 
 .thin {
@@ -137,12 +150,12 @@ main {
 
 .post-subtitle {
     margin-left: 5%;
-    color: lightgray;
+    color: #fff;
 }
 
 .btn-signup,
 .btn-edit {
-    background-color: #188181;
+    background-color: #20374cff;
     color: #fff;
 }
 
@@ -159,7 +172,7 @@ main {
 
 .link:hover,
 .link:active {
-    color: #445261;
+    color: #df6919ff;
     text-decoration: underline;
 }
 
@@ -190,7 +203,7 @@ main {
 }
 
 .faded {
-    color: rgb(172, 175, 175);
+    color: rgba(171, 182, 194, 1);
 }
 
 .approval {
@@ -206,22 +219,26 @@ main {
 .table tbody.status-pending {
     background-color: #f1c40f; /* Yellow for pending */
     --bs-table-bg:#f1c40f;
-    color: #fff;
+    color: #212529ff;
+    --bs-table-color: #212529ff;
 }
 .table tbody.status-attended {
     background-color: #2ecc71; /* Green for attended */
     --bs-table-bg: #2ecc71;
-    color: #fff;
+    color: #212529ff;
+    --bs-table-color: #212529ff;
 }
 .table tbody.status-cancelled {
     background-color: #e74c3c; /* Red for cancelled */
     --bs-table-bg: #e74c3c;
-    color: #fff;
+    color: #212529ff;
+    --bs-table-color: #212529ff;
 }
 .table tbody.status-rescheduled {
     background-color: #3c94e7; /* Blue for cancelled */
     --bs-table-bg: #3c94e7;
-    color: #fff;
+    color: #212529ff;
+    --bs-table-color: #212529ff;
 }
 
 
