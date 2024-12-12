@@ -32,7 +32,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 CLOUDINARY_URL = os.environ.get("CLOUDINARY_URL")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['8000-willwhyd-carecompasshea-argrh9u2k12.ws.codeinstitute-ide.net',
                     'care-compass-app-b1851415864d.herokuapp.com', '.herokuapp.com/'
