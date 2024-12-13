@@ -71,73 +71,150 @@ I used Balsamiq to create my wireframes. The final project looks different from 
 
 The focus was on a simple column display to accomodate a large number of appointments. This approach continued in the Profile page. 
 
+Due to the time limitations on this project, I focused on iterating off my initial wireframe idea, rather than re-draft additional wireframes for individual pages. 
+
 ![Wireframe Example](static/images/README/CC_wireframe1.png)
 
 ##### [ Back to Top ](#table-of-contents)
 
 # Agile Development
 
-Describe your agile development process and link to your Kanban board or project management tool.
+For the development of this project, I adopted an Agile methedology to allow iterative and efficient progress throughout the project development cycle. A core tool in this process was the use of a Kanban board hosted on GitHub Projects. This board can be viewed here: ![Project Board](https://github.com/users/Will-WHyd/projects/4/views/1)
+
+#### Project Board Overview
+The board was divided into a simple set of stacks:
+- "To Do" is the initial creation zone, for upcoming or desired tasks. 
+- "Doing" was to keep focus on priority tasks.
+- "Done" is completed/achieved tasks. 
+- "Won't Do" are tasks deemed valuable but not MVP for this release, and will be revisited for future development of the project. 
+- "Bugs" is the stack to keep track of identified bugs and issues with the code.
+
+User Stories formed the core of the tasklist in this project. But later in development as new issues and bugs arose, a more simple format of brief tasks was adopted for efficiency. Using this approach, the development of Care Compass remained focused on maximising value from the MVP aspects of the project, flexible and responsive to issues as they arose in development. 
 
 ### User Stories Overview
 
-List your user stories
-1. Title [User Story Title]
-   - As a [user type], I can [action] so that [goal].
+1. Create Appointments
+   - As a patient, I can create a medical appointment record, so that I can easily reference details about my upcoming appointments
+
+2. View Paginated Appointment List
+  - As a patient, I can view a list of my appointments, so that I can review my full medical history journey
+
+3. View Appointment Details
+  - As a patient, I can click on an appointment, so that I can see the full information available
+
+4. Profile Page/Address Book
+  - As a user, I can view my profile page, so that I can view my consultant list and care team contact information
+
+5. Profile Page/Address Book
+  - As a user, I can view my profile page, so that I can view my consultant list and care team contact information
+
+6. Adding Consultants
+  - As a user, I can add a doctor/care team member, so that gather a list of members of my care team and consultants and be able to quickly locate their contact information and share it
+
+7. Account Registration
+  - As a user, I can log in, so that I access my own account details and view my personal appointments
+
+8. List View for Consultants
+  - As a site owner, I can display a list view of my consultants within the profile page, so that information across different apps is accessed and users may view specific details and edit/delete them if needed.
+
 
 ##### [ Back to Top ](#table-of-contents)
 
 # Features Implemented
 
-List and describe the features implemented in your project.
-
 ## Home Page
-- Feature 1
-- Feature 2
+- Appointments are displayed as cards. 
+- Users can click on a card to view the entire appointment.
+- Users must be logged in to view and create appointments. 
+- Users can only view their own appointments or profile page. 
+- Users can edit or delete their own appointments. 
 
-## About Page
-- Feature 1
-- Feature 2
+## Nav Bar
+- Navigation links allow easy navigation from appointments to profile, and ensure users can always create an appointment with one tap. 
+- Navigation bar anchors to the left on wide screens and the top of the page in smaller screens. 
 
 ## Profile Page
-- Feature 1
-- Feature 2
+- Users can view their profile information, and edit it.
+- Users can delete their entire account from here. 
+- Users can view a list of their consultants, which represents their 'address book.' 
+- Consultants list populates from any consultants the user created OR selected from the 'public' consultants during an appointment. 
+- Consultants are displayed as a card, users can click 'more' to expand the cards.
+- Users can edit or delete the consultants they created. 
+- Users can create consuntants on this page. 
 
 ## Login Page
-- Feature 1
-- Feature 2
+- Secure signup functionality allows users to register securely.
+- Successful login redirects users to the home page.
 
 ## Registration Page
-- Feature 1
-- Feature 2
+- Secure login functionality allows users to log in and maintain account security.
+- Successful registration redirects users to the home page.
 
 ## Logout Page
-- Feature 1
-- Feature 2
+- Logout functionality allows users to sign out securely.
+- After successful logout, users are redirected to the home page.
 
 ### Responsive Design
-- Feature 1
-- Feature 2
+- The website is designed to be responsive, ensuring optimal usability across a range of devices.
+- Navbar is responsive in style, anchoring to the left hand of the screen on wide screens, and collapses to the top on small screens. 
+- Bootstrap 
 
 ## Additional Security Features
-- Feature 1
-- Feature 2
+- Prevents brute force access of database via URL
+- Users are directed to the login page or a 'forbidden' page if they attempt unauthorized actions. 
+- Users cannot view, edit, or delete other user's appointments.
+- Users can view Consultants created by other users if the consultant is set to Public. Users cannot edit or delete these consultants. 
 
 ##### [ Back to Top ](#table-of-contents)
 
 # Future Features
 
-List and describe the features you plan to implement in the future.
+### Care Team 
+- Users can add another user as a member of their 'Care Team'.
+- Members of the 'Care Team' can view more information on one another's Profile, allowing key information such as contact information and consultant list to be viewed. 
+- This is key as the target audience will likely have support from other people, and this ensures critical information can be viewed even if the User isn't able to access their account in a crisis. 
+
+### Expanded Profiles
+- Expanding Profile permissions to allow a limited view of a user's profile by other users. 
+- Currently, a user can only view their own profile. This update would allow them to share a limited amount of info publicly. 
+- The Care Team would be able to view a wider level of information. 
+
+### Expanded Consultants control
+- Allow users to search a list of public Consultants. 
+- Set up 'Institutions' to allow users to view a list of consultants associated with that institution (ie, doctors/surgeons/nurses in a particulat hospital)
+- Improve logic and handling of Consultants to ensure only publicly available information is used. Potentially implement an approval system where admins need to verify a consultant entry before it can be made Public - limits abuse.
+
+### Search and Filter Appointments
+- Improving appointment lists by adding filtering options, and a 'search' function.
+- Users can search by 'status', 'consultant', 'date range', etc. Users can apply multiple filters to the view.
+- Users can choose to paginate the results or list all on infinite scroll. 
+
+### Improved UX
+- Introducing an improved landing page/about page to better explain the use of the site to new users.
+- Implementing UX improvements to appointment cards and detail pages. 
 
 ##### [ Back to Top ](#table-of-contents)
 
 # Technology Stack
 
-List the technologies used in your project.
-
-- Technology 1
-- Technology 2
-- Technology 3
+- HTML - for page structure
+- CSS - for custom styling
+- Python - for the backend
+- Javascript - for event listeners on buttons and added functionality 
+- Django - framework used to build this project
+- Bootstrap 5 - front end framework used for styling
+- Bootswatch - customization theme for Bootstrap
+- PostgreSQL from Code Institute - used as the database
+- Google Fonts- for custom font styling
+- GitHub - for storing the project
+- Git - for version control
+- GitPod - IDE for the project
+- Heroku - for hosting and deployement of this project
+- Clip Studio - for editing pngs
+- Balsamiq - for wireframes
+- Font Awesome - for social media icons
+- Lucidchart - for database ER diagrams
+- Pexels - for free stock images
 
 ##### [ Back to Top ](#table-of-contents)
 

@@ -11,7 +11,7 @@
             <div class="row">
                 {% for appt in object_list %}
                 <div class="col-12 col-md-6 col-lg-4">
-                    <div class="card mb-4">
+                    <div class="card mb-4 apptstatus-{{appt.status | lower }}">
                         <div class="card-body">
                             <a href="{% url 'appointments:detail' appt.id %}" class="post-link">
                                 <h2 class="card-title">{{ appt.procedure }}</h2>
@@ -32,7 +32,13 @@
             </div>
         </div>
         {% else %}
-        <p>Log in to create and view your appointments</p>
+        <div class="container">
+            <h1>Welcome to Care Compass</h1>
+            <p>Track your healthcare journey and create appointments with ease.</p>
+            <p>To get started, please register or sign in.</p>
+            <a href="{% url 'account_login' %}">Sign In</a>
+            <p style="margin-top: 1rem;">Don't have an account? <a href="{% url 'account_signup' %}">Register here</a>.</p>
+        </div>
         {% endif %}
     </div>
     {% if is_paginated %}

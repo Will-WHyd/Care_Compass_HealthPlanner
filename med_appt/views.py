@@ -21,7 +21,7 @@ class ApptList(generic.ListView):
             return Appointment.objects.filter(user=self.request.user).order_by('-appt_date')
         else:
             return Appointment.objects.none()
-    paginate_by = 8
+    paginate_by = 12
     
 @login_required
 def appt_detail(request, id):
