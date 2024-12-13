@@ -36,8 +36,8 @@
             <h1>Welcome to Care Compass</h1>
             <p>Track your healthcare journey and create appointments with ease.</p>
             <p>To get started, please register or sign in.</p>
-            <a href="{% url 'account_login' %}">Sign In</a>
-            <p style="margin-top: 1rem;">Don't have an account? <a href="{% url 'account_signup' %}">Register here</a>.</p>
+            <a href="{% url 'account_login' %}"><button type="button" class="btn btn-outline-primary">Sign In</button></a>
+            <p style="margin-top: 1rem;">Don't have an account? <a href="{% url 'account_signup' %}"><button type="button" class="btn btn-outline-primary">Register here</button></a></p>
         </div>
         {% endif %}
     </div>
