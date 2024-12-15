@@ -8,12 +8,13 @@ from .models import Appointment, Consultant
 from user_profile.models import Profile
 from .forms import AppointmentForm, ConsultantForm
 
+
 # Create your views here.
 class ApptList(generic.ListView):
     """
-    Displays list of appointments belonging to the logged-in user. 
+    Displays list of appointments belonging to the logged-in user.
 
-    List is displayed in decending order of 'appt_date'. 
+    List is displayed in decending order of 'appt_date'.
     """
     model = Appointment
     template_name = 'appt/index.html'
@@ -24,14 +25,15 @@ class ApptList(generic.ListView):
         else:
             return Appointment.objects.none()
     paginate_by = 12
-    
+
+
 @login_required
 def appt_detail(request, id):
     """
-    Displays appointment details page for selected appointment.  
+    Displays appointment details page for selected appointment.
 
     **Context**
-    ``appt`` 
+    ``appt``
         An instance of :model:`med_appt.Appointment`
     """
     appt = get_object_or_404(Appointment, id=id)
@@ -46,10 +48,11 @@ def appt_detail(request, id):
     else:
         return render(request, "appt/403.html")
 
+
 @login_required
 def appt_create(request):
     """
-    Creates a new instance of Appointment via form. 
+    Creates a new instance of Appointment via form.
     """
     appt_form = AppointmentForm()
     if request.method == 'POST':
@@ -66,20 +69,22 @@ def appt_create(request):
 
     return render(request, 'appt/create_appt.html', {'appt_form': appt_form})
 
+
 @login_required
 def appt_edit(request, id):
     """
-    Redirects from an appointment detail page to a form page which allows editing and updating of appointment details. 
+    Redirects from an appointment detail page to a form page
+    which allows editing and updating of appointment details.
 
     **Context**
-    ``appt`` 
+    ``appt``
         An instance of :model:`med_appt.Appointment`
     """
     appt = get_object_or_404(Appointment, id=id)
 
     if appt.user != request.user:
         return render(request, "appt/403.html")
-    
+
     if request.method == 'POST':
         appt_form = AppointmentForm(request.POST, instance=appt)
         if appt_form.is_valid():
@@ -91,16 +96,17 @@ def appt_edit(request, id):
             return redirect('appointments:detail', id=appt.id)
     else:
         appt_form = AppointmentForm(instance=appt)
-    
+
     return render(request, 'appt/edit_appt.html', {'appt_form': appt_form, 'appt': appt})
+
 
 @login_required
 def appt_delete(request, id):
     """
-    Redirects from an appointment detail page to delete that appointment.  
+    Redirects from an appointment detail page to delete that appointment.
 
     **Context**
-    ``appt`` 
+    ``appt``
         An instance of :model:`med_appt.Appointment`
     """
     appt = get_object_or_404(Appointment, id=id)
@@ -119,7 +125,7 @@ def appt_delete(request, id):
 @login_required
 def consultant_create(request):
     """
-    Creates a new instance of Consultant via form. 
+    Creates a new instance of Consultant via form.
     """
     form = ConsultantForm()
     if request.method == 'POST':
@@ -128,7 +134,7 @@ def consultant_create(request):
             consultant = form.save(commit=False)
             consultant.user = request.user
             consultant.save()
-            # Adds user profile to new consultant's 'clients' field. 
+            # Adds user profile to new consultant's 'clients' field.
             consultant.clients.add(request.user.profile)
             consultant.save()
             messages.add_message(
@@ -137,23 +143,24 @@ def consultant_create(request):
             )
             return redirect('profile:profile')
 
-    return render(request, 'appt/create_consultant.html', {'form': form,})
+    return render(request, 'appt/create_consultant.html', {'form': form})
 
 
 @login_required
 def consultant_edit(request, id):
     """
-    Redirects from a displayed consultant card on profile page to a form page which allows editing and updating of Consultant details. 
+    Redirects from a displayed consultant card on profile page
+    to a form page which allows editing and updating of Consultant details.
 
     **Context**
-    ``consultant`` 
+    ``consultant``
         An instance of :model:`med_appt.Consultant`
     """
     consultant = get_object_or_404(Consultant, id=id)
 
     if consultant.user != request.user:
         return render(request, "appt/403.html")
-    
+
     if request.method == 'POST':
         form = ConsultantForm(request.POST, instance=consultant)
         if form.is_valid():
@@ -165,16 +172,18 @@ def consultant_edit(request, id):
             return redirect('profile:profile')
     else:
         form = ConsultantForm(instance=consultant)
-    
+
     return render(request, 'appt/edit_consultant.html', {'form': form, 'consultant': consultant})
+
 
 @login_required
 def consultant_delete(request, id):
     """
-    Redirects from a displayed consultant card on profile page to delete that Consultant. 
+    Redirects from a displayed consultant card
+    on profile page to delete that Consultant.
 
     **Context**
-    ``consultant`` 
+    ``consultant``
         An instance of :model:`med_appt.Consultant`
     """
     consultant = get_object_or_404(Consultant, id=id)

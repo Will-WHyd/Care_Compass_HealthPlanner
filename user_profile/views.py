@@ -12,30 +12,32 @@ from itertools import chain
 
 
 # Create your views here.
-
 def profile_view(request):
     """
     Renders the most recent information on the user's profile page.
     Displays an individual instance of :model: 'user_profile.Profile'
 
+    Additionally, creates list of consultants to display on profile page
+
     **Context**
     ``profile`` 
         An instance of :model:`user_profile.Profile`
     """
-
     profile = get_object_or_404(Profile, user=request.user)
 
     if request.user.is_authenticated:
+        # Collects both public consultants and profile-associated private consultants
         try:
             public_consultants = Consultant.objects.filter(private=False)
-            private_consultants = Consultant.objects.filter(private=True, clients=profile) 
+            private_consultants = Consultant.objects.filter(private=True, clients=profile)
             consultants = list(chain(public_consultants, private_consultants))
         except Profile.DoesNotExist:
             consultants = Consultant.objects.filter(private=False)
     else:
-            consultants = Consultant.objects.filter(private=False)    
+            consultants = Consultant.objects.filter(private=False)
 
     return render(request, "profile/profile.html", {"profile": profile, "consultants": consultants})
+
 
 @login_required
 def edit_profile(request):
@@ -48,7 +50,7 @@ def edit_profile(request):
     template = "edit_profile.html"
     profile = get_object_or_404(Profile, user=request.user)
     profile_form = ProfileForm()
-     
+
     if request.method == 'POST':
         profile_form = ProfileForm(request.POST, instance=profile)
         if profile_form.is_valid():
@@ -63,8 +65,9 @@ def edit_profile(request):
             return redirect('profile:profile')
     else:
         profile_form = ProfileForm(instance=profile)
-        
+
     return render(request, 'profile/edit_profile.html', {'profile_form': profile_form, 'profile': profile})
+
 
 @login_required
 def delete_account(request):
@@ -74,6 +77,7 @@ def delete_account(request):
     user = get_object_or_404(User, id=request.user.id)
 
     if user.is_superuser:
+        # Prevent deletion of superuser account
         messages.error(request, 'Admin accounts cannot be deleted.')
         return redirect('appointments:home')
 
