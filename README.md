@@ -229,13 +229,37 @@ I used Chrome dev tools to test for responsiveness, using Bootstrap classes to b
 
 ### Testing and Validation
 
+- I used the [W3 HTML Validator](https://validator.w3.org/#validate_by_input+with_options) to check the HTML on each of my site pages by Direct Input. HTML validation reported certain errors that I am aware of, and have chosen not to address at this time:
+1. The element button must not appear as a descendant of the a element. [s/login/"><button type="button" class="btn btn-outline-primary">Sign In]
+2. Duplicate ID deleteModalLabel.
+3. The first occurrence of ID deleteModalLabel was here.
+
+These issues do not affect functionality, and can be addressed in later development. The issue of the button being a decendant of a link is due to preference for the visual appearance it has on the screen, and more time is needed to find a better implementation of this through custom css. 
+
+The issue of the deleteModalLabel is due to how the project implemented a second custom modal, and more time is needed to find a better implementation. 
+
+![HTML validated](staticfiles/images/README/HTML-validated.png)
+
+- I used the [W3 CSS Validator](https://jigsaw.w3.org/css-validator/#validate_by_input) to check the CSS of my page via direct input. There were no errors, and 2 warnings regartding vendor extentions. 
+
+![CSS validated](staticfiles/images/README/CSS-validated.png)
+
+
 
 
 ### HOME PAGE
 
- Test                                      Result 
--------------------------------------------------
- Test description                         Pass   
+| Test                                    | Result |
+|-----------------------------------------|--------|
+| Appointments displayed as cards         | Pass   |
+| Appointments displayed in order of appointment date | Pass |
+| Appointments only viewable on login | Pass |
+| Site Description/Blurb available to logged out users | Pass |
+| Navbar responsiveness | Pass |
+| Ability to click on Appointments | Pass |
+| Ability to click on Navbar elements | Pass |
+| Ability to click on 'Create Appointment | Pass |
+| Creation limited to logged in users | Pass | 
 
 ### ABOUT PAGE
 
