@@ -1,5 +1,8 @@
+<!-- Ensures navbar anchors to left of screen on wider screens. CSS media query extends this to 100VH on md/lg screens -->
 <nav class="navbar navbar-expand-md navbar-light bg-white col-md-4 col-lg-3 flex-column">
+    <!-- Ensures navbar takes up as much of the space possible, pushing 'logged in as' text to bottom -->
     <div class="flex-grow-1">
+
         <!-- Groups all navbar elements together for column display. Remove this if you want elements spread out -->
         <a class="navbar-brand" href="{% url 'appointments:home' %}"><span class="brand"><span
                     class="red-o">Care</span><span class="thin"> <i class="fa-regular fa-compass"></i>
@@ -24,6 +27,7 @@
                         href="{% url 'account_logout' %}">Sign out</a>
                 </li>
                 <li class="nav-item">
+                    <!-- Button used here intentionally -->
                     <a class="nav-link {% if request.path == create_url %}active{% endif %}" aria-current="page"
                         href="{% url 'appointments:create' %}"><button type="button" class="btn btn-outline-primary">Create New Appointment</button></a>
                 </li>

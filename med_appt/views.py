@@ -11,7 +11,9 @@ from .forms import AppointmentForm, ConsultantForm
 # Create your views here.
 class ApptList(generic.ListView):
     """
-    Displays list of appointments belonging to the logged-in user
+    Displays list of appointments belonging to the logged-in user. 
+
+    List is displayed in decending order of 'appt_date'. 
     """
     model = Appointment
     template_name = 'appt/index.html'
@@ -25,6 +27,13 @@ class ApptList(generic.ListView):
     
 @login_required
 def appt_detail(request, id):
+    """
+    Displays appointment details page for selected appointment.  
+
+    **Context**
+    ``appt`` 
+        An instance of :model:`med_appt.Appointment`
+    """
     appt = get_object_or_404(Appointment, id=id)
 
     if appt.user == request.user:
@@ -87,6 +96,13 @@ def appt_edit(request, id):
 
 @login_required
 def appt_delete(request, id):
+    """
+    Redirects from an appointment detail page to delete that appointment.  
+
+    **Context**
+    ``appt`` 
+        An instance of :model:`med_appt.Appointment`
+    """
     appt = get_object_or_404(Appointment, id=id)
 
     if appt.user == request.user:
@@ -98,54 +114,6 @@ def appt_delete(request, id):
         return redirect('appointments:home')
     else:
         return render(request, "appt/403.html")
-
-
-
-# @login_required
-# def consultant_list(request):
-#     """
-#     Displays list of appointments belonging to the logged-in user
-#     """
-#     if request.user.profile:
-#         profile = request.user.profile
-
-#         public_consultants = Consultant.objects.filter(private=False)
-#         private_consultants = Consultant.objects.filter(private=True, clients=profile)
-
-#         consultants = public_consultants | private_consultants
-#         consultants = consultants.distinct()
-
-#     else:
-#         consultants = Consultant.objects.filter(private=False)
-    
-#     return render(request, "appt/list_consultant.html", {"consultants": consultants})
-
-
-# class ConsultList(generic.ListView):
-#     """
-#     Displays list of consultants
-#     """
-
-#     model = Consultant
-#     template_name = 'appt/list_consultant.html'
-#     paginate_by = 8
-
-#     def get_queryset(self):
-#         if self.request.user.is_authenticated:
-#             try:
-#                 profile = Profile.objects.get(user=self.request.user)
-
-#                 public_consultants = Consultant.objects.filter(private=False)
-#                 private_consultants = Consultant.objects.filter(private=True, clients=profile)
-
-#                 consultants = public_consultants | private_consultants
-#                 consultants = consultants.distinct()
-#             except Profile.DoesNotExist:
-#                 consultants = Consultant.objects.filter(private=False)
-#         else:
-#             consultants = Consultant.objects.filter(private=False)
-
-#         return consultants
 
 
 @login_required
@@ -160,6 +128,7 @@ def consultant_create(request):
             consultant = form.save(commit=False)
             consultant.user = request.user
             consultant.save()
+            # Adds user profile to new consultant's 'clients' field. 
             consultant.clients.add(request.user.profile)
             consultant.save()
             messages.add_message(
@@ -173,6 +142,13 @@ def consultant_create(request):
 
 @login_required
 def consultant_edit(request, id):
+    """
+    Redirects from a displayed consultant card on profile page to a form page which allows editing and updating of Consultant details. 
+
+    **Context**
+    ``consultant`` 
+        An instance of :model:`med_appt.Consultant`
+    """
     consultant = get_object_or_404(Consultant, id=id)
 
     if consultant.user != request.user:
@@ -194,6 +170,13 @@ def consultant_edit(request, id):
 
 @login_required
 def consultant_delete(request, id):
+    """
+    Redirects from a displayed consultant card on profile page to delete that Consultant. 
+
+    **Context**
+    ``consultant`` 
+        An instance of :model:`med_appt.Consultant`
+    """
     consultant = get_object_or_404(Consultant, id=id)
 
     if consultant.user == request.user:

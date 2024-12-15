@@ -6,13 +6,7 @@
 {% block content %}
 <div class="container-fluid mt-5">
     <div class="row justify-content-center">
-        <!-- <div class="col-12 col-md-4 text-center">
-            {% if "placeholder" in profile.featured_image.url %}
-            <img src="{% static 'images/nobody.jpg' %}" alt="placeholder image" class="profile-image">
-            {% else %}
-            <img src="{{ profile.profile_image.url }}" alt="{{ profile.name }}" class="profile-image">
-            {% endif %}
-        </div> -->
+
         <div class="col-12 col-md-8 text-center">
             <h2>{{ profile.name }}</h2>
             <p>
@@ -30,16 +24,20 @@
 
         </div>
         <hr>
+        <!-- Consultants List -->
+         <!-- Displays info on left hand and consultants on right -->
         <div class="col-12 col-md-3 text-center">
             <h2>Consultants</h2>
             <p>You can add or edit consultants here. Consultants selected for your appointments will be added to this list. </p>
             <p>You can edit or remove consultants by clicking on the 'More. button beside their name.</p>
             <p>You can add new consultants with the button below.</p>
+
             <a href="{% url 'appointments:consultant_create' %}" class="d-block">
                 <button class="btn btn-light w-100">Add Consultant</button>
             </a>
         </div>
         <div class="col-12 col-md-8 text-center">
+            <!-- Imports consultant list from med_appt app -->
             {% include 'appt/list_consultant.html' with consultants=consultants %}
         </div>
 

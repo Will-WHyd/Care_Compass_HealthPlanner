@@ -6,6 +6,9 @@ from datetime import datetime
 
 
 class AppointmentForm(forms.ModelForm):
+    """
+    Form class for users to create an appointment. 
+    """
     class Meta:
         model = Appointment
         fields = [
@@ -19,6 +22,7 @@ class AppointmentForm(forms.ModelForm):
             "travel_details"
         ]
 
+        # Widgets for time/date selection on form
         widgets = {
             "appt_date": forms.DateInput(
                 attrs={
@@ -40,6 +44,7 @@ class AppointmentForm(forms.ModelForm):
         # set default time
         self.fields['appt_date'].initial = datetime.now().date()
 
+        # Ensures users can only view public Consultants AND private consultants they have created
         if user is not None and hasattr (user, 'profile'):
             profile = user.profile
             self.fields['consultant'].queryset = Consultant.objects.filter(private=False) | Consultant.objects.filter(private=True, clients=profile)
@@ -53,6 +58,9 @@ class AppointmentForm(forms.ModelForm):
 
 
 class ConsultantForm(forms.ModelForm):
+    """
+    Form class for users to create a Consultant. 
+    """
     class Meta:
         model = Consultant
         fields = [

@@ -4,6 +4,9 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 
 class ProfileForm(forms.ModelForm):
+    """
+    Form class for users to update profile details
+    """
     class Meta:
         model = Profile
         fields = [

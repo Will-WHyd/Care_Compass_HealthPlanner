@@ -4,8 +4,12 @@ from django.contrib.auth.models import User
 from .models import Profile
 from med_appt.models import Appointment, Consultant
 
+
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
+    """
+    Ensures new users automatically have an extended Profile upon account creation
+    """
     if created:  # This ensures it only runs when a new User is created
         Profile.objects.create(user=instance)
 
@@ -14,8 +18,12 @@ def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
 
 
+
 @receiver(post_save, sender=Appointment)
 def associate_profile_with_consultant(sender, instance, created, **kwargs):
+    """
+    Upon creating an Appointment with a new consultant, ensures the user's Profile is added to the consultant object's 'clients' field.
+    """
     if created:  # Ensure this runs only when a new Appointment is created
         consultant = instance.consultant
         user_profile = instance.user.profile

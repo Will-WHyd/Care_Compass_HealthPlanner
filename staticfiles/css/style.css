@@ -17,6 +17,7 @@ body {
     background-attachment: fixed; 
 }
 
+/* Sets an overlay onto background image */
 body::before {
     content: "";
     position: fixed;
@@ -29,9 +30,8 @@ body::before {
 }
 
 
-
 main {
-    z-index: 3; /* Ensure content appears above the overlay */
+    z-index: 3; 
     position: relative;
     padding: 20px;
 }
@@ -43,6 +43,7 @@ footer {
     position: relative;
 }
 
+/* Important settings for responsive navbar */
 .navbar {
     position: fixed !important;
     z-index: 100;
@@ -129,10 +130,6 @@ footer {
     z-index: 100;
 }
 
-.profile-image {
-    width: 75%;
-}
-
 .post-link {
     text-decoration: none;
     color: #fff;
@@ -202,16 +199,8 @@ footer {
     padding: 0.75rem 1rem;
 }
 
-.faded {
-    color: rgba(171, 182, 194, 1);
-}
 
-.approval {
-    color: rgb(222, 146, 168);
-}
-
-
-/* Table settings */
+/* Table and Card settings to provide formatting based on appointment status (pending/attended/etc) */
 
 .table th, .table td {
     text-align: center;

@@ -9,9 +9,9 @@ The responsive website allows registered users to create entries for medical app
 
 # [Link to Live Site](https://care-compass-app-b1851415864d.herokuapp.com/)  
 
-This project is created as a final full-stack personal assessment for the 2024 Code Institute Full-Stack Developer Bootcamp.  
+*This project is created as a final full-stack personal assessment for the 2024 Code Institute Full-Stack Developer Bootcamp.*
 
-Built by William Waldron-Hyden
+### **Built by William Waldron-Hyden**
 
 ---
 
@@ -251,96 +251,163 @@ The issue of the deleteModalLabel is due to how the project implemented a second
 
 | Test                                    | Result |
 |-----------------------------------------|--------|
-| Appointments displayed as cards         | Pass   |
+| Appointment list displayed as cards         | Pass   |
 | Appointments displayed in order of appointment date | Pass |
-| Appointments only viewable on login | Pass |
+| Appointment list only viewable on login | Pass |
 | Site Description/Blurb available to logged out users | Pass |
 | Navbar responsiveness | Pass |
 | Ability to click on Appointments | Pass |
 | Ability to click on Navbar elements | Pass |
 | Ability to click on 'Create Appointment | Pass |
-| Creation limited to logged in users | Pass | 
+| Creation limited to logged in users | Pass |  
 
-### ABOUT PAGE
+### NAVBAR
+| Test                                    | Result |
+|-----------------------------------------|--------|
+| Navbar responsiveness | Pass |
+| Ability to click on Navbar elements | Pass |
+| Ability to click on 'Create Appointment' | Pass |
+| Navbar extends to 100VH on large screens | Pass |
 
- Test                                      Result 
--------------------------------------------------
- Test description                         Pass   
+
+### APPOINTMENT DETAILS PAGE
+
+| Test                                    | Result |
+|-----------------------------------------|--------|
+| Appointment details only viewable when logged in | Pass | 
+| Clicking on appointment leads to correct appointment | Pass | 
+| Create Appointment form functionality  | Pass |
+| Edit Appointment form functionality | Pass | 
+| Delete Appointment functionality | Pass |
+| Edit/Delete only possible to logged in user | Pass |
+| Responsive CSS to Appointment Status functions | Pass |
 
 ### PROFILE PAGE
 
- Test                                      Result 
--------------------------------------------------
- Test description                         Pass   
+| Test                                    | Result |
+|-----------------------------------------|--------|
+| Profile created on user creation | Pass | 
+| Profile displays only to logged in users | Pass | 
+| Displays edited profile information | Pass | 
+| Edit profile form functionality exists | Pass | 
+| Delete profile deletes account correctly | Pass | 
+| List of Consultants displays correctly | Pass | 
+| Consultant Create link to form functionality | Pass | 
+| Consultant card dropdowns function correctly | Pass | 
+| Edit consultant form functionality | Pass | 
+| Delect consultant form functionality | Pass | 
+| Only edit/delete consultants created by user | Pass | 
 
 ### LOGIN PAGE
 
- Test                                      Result 
--------------------------------------------------
- Test description                         Pass   
+| Test                                    | Result |
+|-----------------------------------------|--------|
+| Secure login functionality | Pass |
+| Redirect after successful login | Pass |  
 
 ### REGISTRATION PAGE
 
- Test                                      Result 
--------------------------------------------------
- Test description                         Pass   
+| Test                                    | Result |
+|-----------------------------------------|--------|
+| Secure signup functionality | Pass |
+| Redirect after successful signup | Pass |  
 
 ### LOGOUT PAGE
 
- Test                                      Result 
--------------------------------------------------
- Test description                         Pass   
+| Test                                    | Result |
+|-----------------------------------------|--------|
+| Secure logout functionality | Pass |
+| Redirect after successful logout | Pass |   
 
 ### SECURITY
 
- Test                                      Result 
--------------------------------------------------
- Test description                         Pass   
+| Test                                    | Result |
+|-----------------------------------------|--------|
+| Prevention of brute force actions via URL	 | Pass |
+| Redirect to sign-in page or 403 error page after attempted unauthorized action	 | Pass |
 
 ##### [ Back to Top ](#table-of-contents)
 
 # Known Bugs
 
-List any known bugs here.
+- Notification messages for successful actions (creating/editing appointments or consultants) will not disappear. This should be basic functionality from bootstrap but it is not functioning correctly. Further investigation needed to improve the user experience on this front. 
+- Appointment time should be limited to 5 minute intervals. Currently the form will not allow users to submit a form if the time is not in a 5-minute interval, but the selection widget still allows invalid intervals to be selected. Changes need to be investigated for the form.
+- Navbar responsiveness - on certain medium screens the navbar will not extend to 100VH as intended. 
+- Image uploads - initially, image uploading was intended so users could set their own profile page. This has been removed due to persistant issues with the Cloudinary connection. 
 
 ##### [ Back to Top ](#table-of-contents)
 
 # Deployment 
 
-## Deployment Guide
+## Deployment Guide 
 
 ### Deployment Steps
 
 #### Creating the Heroku App
 
-- Step-by-step instructions.
+- Sign up or log in to Heroku.
+- In the Heroku Dashboard, click "New" and select "Create New App."
+- Choose a unique name for your project (e.g., "Care Compass").
+- Select the EU region and click "Create App."
+- Navigate to the "Deploy" tab in Heroku.
+- Choose GitHub as the deployment method.
+- Connect your GitHub account and link your GitHub repository.
 
 #### Setting Up Environment Variables
 
-- Step-by-step instructions.
+- Create an `env.py` file in the top-level directory of the Django app.
+- Import os in `env.py`.
+- Add necessary environment variables (e.g., secret key, database URL) in `env.py`.
+- Update `settings.py` to use environment variables for the secret key and database configuration, referencing the `env.py` values.
+- Add environment variables to the "Config Vars" section under the "Settings" tab in Heroku.
+- Run `manage.py makemigrations/migrations` in the terminal to connect models to the new database.
+- Update `settings.py` to configure static files and template directories in the desired locations within the project.
+- Add "Heroku" to the `ALLOWED_HOSTS` list.
 
 #### Creating Procfile and Pushing Changes
 
-- Step-by-step instructions.
+- Create a `Procfile` in the top-level directory of your project.
+- Add the command to run the project in the `Procfile`.
+- Add, commit, and push changes to your GitHub repository.
 
 #### Heroku Deployment
 
-- Step-by-step instructions.
+- Go to the "Deploy" tab in Heroku and manually deploy the branch.
+- Monitor the build logs for any errors.
+- Upon successful deployment, Heroku will display a link to the live site.
+- Resolve any deployment errors by adjusting the code as needed.
+- Ensure Heroku uses Ecodynos to minimize costs on small projects like this. 
 
 ### Forking the Repository
+Forking the repository allows you to create a copy of the project without affecting it. To do so, follow these steps:
 
-- Step-by-step instructions.
+- Log in to GitHub or create an account.
+- Visit the repository link for "Care Compass."
+- Click on "Fork" at the top of the repository.
 
 ### Creating a Clone of the Repository
+Cloning the repository allows you to create a local copy of the repository. To do so, follow these steps:
 
-- Step-by-step instructions.
+- Navigate to the "Care Compass" repository on GitHub.
+- Click on the "Code" button and select the "HTTPS" option under the "Local" tab.
+- Copy the repository URL.
+- Open your terminal and navigate to your desired directory.
+- Use the command git clone [copied repository URL] to clone the repository locally.
 
 ##### [ Back to Top ](#table-of-contents)
 
 # Resources
 
-- [Resource 1](#)
-- [Resource 2](#)
+- [Code Institute Full Stack Developer Bootcamp resources](https://codeinstitute.net/)
+- [Django Docs](https://www.djangoproject.com/)
+- [Crispy Forms docs](https://django-crispy-forms.readthedocs.io/en/latest/)
+- [Bootstrap Docs](https://getbootstrap.com/)
+- [Bootswatch custom themes](https://bootswatch.com/)
+- [Stack Overflow](https://stackoverflow.com/)
+- [ChatGPT](https://chatgpt.com/)
+- [Balsamiq](https://balsamiq.cloud/)
+- [LucidChart](https://lucid.app/)
+- [Code Institute Slack](https://slack.com/)
 
 ##### [ Back to Top ](#table-of-contents)
 
@@ -348,12 +415,20 @@ List any known bugs here.
 
 ## Images
 
-- Source 1
-- Source 2
+- The Care Compass icon and favicon is from Font Awesome's free library. 
+- Background map/compass image is from royalty free stock photos on [Pexels](https://www.pexels.com/)
+- Site theme based on Superhero from [Bootswatch](https://bootswatch.com/)
 
 ## Code
 
-- Source 1
-- Source 2
+- **Code Institute** course content - provided instructional basis for the project, guidance and knowledge from SME, facilitators, and fellow students. The blog codealong project served as the core reference for early development, and certain elements such as a few CSS style examples and JS functions were implemented here as well. 
+- **Code Institute github project references** - sample past projects provided for reference, which inspired new functionality and gave new examples of code to implement. In particular, GitHub user TulaUnogi and the [Cat Beans Cafe](https://github.com/TulaUnogi/cat-beans-cafe) project.
+- **ChatGPT** for debugging and troubleshooting, as well as referencing possible solutions and approaches to my code. 
+- **Stack Overflow** for discussing and identifying unusual errors, such as Modal window issues. 
+
+## Acknowledgements
+
+- Course Facilitator **David Calikes**, who was a source of unending support and enthusiasm, helping guide the project from the beginning. 
+- My fellow bootcamp members, in particular **Stephen Bevan** and **Emma Sadler**, who provided advice and insight into the development process. 
 
 ##### [ Back to Top ](#table-of-contents)

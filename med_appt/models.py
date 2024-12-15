@@ -16,6 +16,10 @@ STATUS = (
 # Create your models here.
 
 class Consultant(models.Model):
+    """
+    Stores a single Consultant entry related to :model:`auth.User`. 
+    in views.py, :model:`user_profile.profile` is associated with the Consultant on creation via 'clients'
+    """
     name = models.CharField(max_length=100, null=False, blank=False)
     specialty = models.CharField(max_length=100, null=False, blank=False, default='General Practitioner')
     institution = models.CharField(max_length=100, null=False, blank=False, default='No Institution/Hospital set')
@@ -34,7 +38,7 @@ class Consultant(models.Model):
 # Model for creating appointments
 class Appointment(models.Model):
     """
-    Stores a single Appointment related to :model:`auth.user`
+    Stores a single Appointment related to :model:`auth.user` and :model:`appt.Consultant`
     """
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     procedure = models.CharField(max_length=200)

@@ -6,7 +6,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 # Create your models here.
 class Profile(models.Model):
     """
-    Stores a single Profile page entry details
+    Stores a single Profile page entry detail related to :model:`auth.User`. Extends the User model. 
     """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=50, null=False, blank=False, default='New User')

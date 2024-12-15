@@ -41,6 +41,7 @@
     <div class="d-flex flex-column min-vh-100">
         <div class="row flex-grow-1 body-row-zone">
 
+            <!-- Navbar goes here -->
             {% include 'navbar.html' %}
 
             <main class="col-md-8 offset-md-4 flex-grow-1 main-bg">
@@ -73,6 +74,7 @@
         </div>
 
         <div class="offset-md-3">
+            <!-- Footer goes here -->
             {% include 'footer.html' %}
         </div>
         
@@ -87,6 +89,7 @@
     {% block extras %}
     {% endblock %}
 
+    <!-- Modals go here. They must be outside and after all other elements or functionality issues occur -->
     {% include 'modals.html' %}
 
 </body>

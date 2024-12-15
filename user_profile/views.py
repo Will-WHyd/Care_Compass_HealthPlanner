@@ -17,6 +17,10 @@ def profile_view(request):
     """
     Renders the most recent information on the user's profile page.
     Displays an individual instance of :model: 'user_profile.Profile'
+
+    **Context**
+    ``profile`` 
+        An instance of :model:`user_profile.Profile`
     """
 
     profile = get_object_or_404(Profile, user=request.user)
@@ -37,6 +41,9 @@ def profile_view(request):
 def edit_profile(request):
     """
     Renders the profile settings edit page
+    **Context**
+    ``profile`` 
+        An instance of :model:`user_profile.Profile`
     """
     template = "edit_profile.html"
     profile = get_object_or_404(Profile, user=request.user)
@@ -61,6 +68,9 @@ def edit_profile(request):
 
 @login_required
 def delete_account(request):
+    """
+    Deletes the user and associated data. 
+    """
     user = get_object_or_404(User, id=request.user.id)
 
     if user.is_superuser:
