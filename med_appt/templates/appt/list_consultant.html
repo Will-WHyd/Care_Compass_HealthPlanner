@@ -4,7 +4,6 @@
     <div class="row justify-content-center">
         {% for consultant in consultants %}
         <div class="col-md-10 mb-3">
-
             <div class="card mb-10">
                 <div class="row">
                     <div class="col-md-9">
@@ -17,7 +16,6 @@
                         <button class="btn btn-primary h-100" type="button" data-bs-toggle="collapse"
                             data-bs-target="#collapse-{{consultant.id}}">More...</button>
                     </div>
-
 
                     <div class="collapse" id="collapse-{{consultant.id}}">
                         <div class="card-body">
@@ -39,8 +37,8 @@
                                         data-model="consultant">Delete</button>
                                 </div>
                             </div>
+                            {% endif %}
                         </div>
-                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -70,5 +68,5 @@
     </nav>
     {% endif %}
 
-    
+
 </div>

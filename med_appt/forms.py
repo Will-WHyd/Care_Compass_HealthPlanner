@@ -35,10 +35,18 @@ class AppointmentForm(forms.ModelForm):
     
 
     def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', None)
         super(AppointmentForm, self).__init__(*args, **kwargs)
         # set default time
         self.fields['appt_date'].initial = datetime.now().date()
 
+        if user is not None and hasattr (user, 'profile'):
+            profile = user.profile
+            self.fields['consultant'].queryset = Consultant.objects.filter(private=False) | Consultant.objects.filter(private=True, clients=profile)
+        else:
+            self.fields['consultant'].queryset = Consultant.objects.filter(private=False)
+
+        # Configure crispy forms:
         self.helper = FormHelper()
         self.helper.form_method = 'POST'
         self.helper.add_input(Submit('submit', 'Create Appointment'))

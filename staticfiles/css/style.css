@@ -268,7 +268,7 @@ footer {
 /* Media queries */
 /* Navbar control */
 
-@media (min-width: 768px) {
+@media (min-width: 802px) {
     .navbar {
         height: 100vh;
     }

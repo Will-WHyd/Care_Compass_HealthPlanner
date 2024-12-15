@@ -220,7 +220,16 @@ User Stories formed the core of the tasklist in this project. But later in devel
 
 # Testing and Validation
 
-Describe your testing and validation process.
+### Responsiveness
+I used Chrome dev tools to test for responsiveness, using Bootstrap classes to build in most of the flexible structure in the site. One exception is the navbar, where a media query is used to set the navbar section's height to 100VH on larger screens, which works with the Bootstrap classes to ensure a left-hand anchored menu on large screens and a top-anchored, collapsing menu on small screens. 
+
+![Responsiveness on amiresponsive](staticfiles/images/README/amiresponsive-previews.png)
+
+[Preview generated at UI.dev](https://ui.dev/amiresponsive)
+
+### Testing and Validation
+
+
 
 ### HOME PAGE
 

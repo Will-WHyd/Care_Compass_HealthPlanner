@@ -44,7 +44,7 @@ def appt_create(request):
     """
     appt_form = AppointmentForm()
     if request.method == 'POST':
-        appt_form = AppointmentForm(request.POST)
+        appt_form = AppointmentForm(request.POST, user=request.user)
         if appt_form.is_valid():
             appointment = appt_form.save(commit=False)
             appointment.user = request.user
@@ -159,6 +159,8 @@ def consultant_create(request):
         if form.is_valid():
             consultant = form.save(commit=False)
             consultant.user = request.user
+            consultant.save()
+            consultant.clients.add(request.user.profile)
             consultant.save()
             messages.add_message(
                 request, messages.SUCCESS,
